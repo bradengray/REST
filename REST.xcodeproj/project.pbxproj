@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		F22A3D0B1D9E0B5C0024376F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D0A1D9E0B5C0024376F /* main.m */; };
 		F22A3D0E1D9E0B5C0024376F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D0D1D9E0B5C0024376F /* AppDelegate.m */; };
-		F22A3D111D9E0B5C0024376F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D101D9E0B5C0024376F /* ViewController.m */; };
 		F22A3D141D9E0B5C0024376F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22A3D121D9E0B5C0024376F /* Main.storyboard */; };
 		F22A3D171D9E0B5C0024376F /* REST.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D151D9E0B5C0024376F /* REST.xcdatamodeld */; };
 		F22A3D191D9E0B5C0024376F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F22A3D181D9E0B5C0024376F /* Assets.xcassets */; };
 		F22A3D1C1D9E0B5C0024376F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22A3D1A1D9E0B5C0024376F /* LaunchScreen.storyboard */; };
 		F22A3D271D9E0B5C0024376F /* RESTTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D261D9E0B5C0024376F /* RESTTests.m */; };
 		F22A3D321D9E0B5C0024376F /* RESTUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D311D9E0B5C0024376F /* RESTUITests.m */; };
+		F22A3D451D9E0C360024376F /* WeatherHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D441D9E0C360024376F /* WeatherHelper.m */; };
+		F22A3D481D9EEBDF0024376F /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D471D9EEBDF0024376F /* WeatherViewController.m */; };
+		F22A3D4B1D9F1CE40024376F /* WeatherParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D4A1D9F1CE40024376F /* WeatherParser.m */; };
+		F22A3D511DA03A6E0024376F /* WeatherDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A3D501DA03A6E0024376F /* WeatherDetailTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +43,6 @@
 		F22A3D0A1D9E0B5C0024376F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F22A3D0C1D9E0B5C0024376F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F22A3D0D1D9E0B5C0024376F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F22A3D0F1D9E0B5C0024376F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F22A3D101D9E0B5C0024376F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F22A3D131D9E0B5C0024376F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F22A3D161D9E0B5C0024376F /* REST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = REST.xcdatamodel; sourceTree = "<group>"; };
 		F22A3D181D9E0B5C0024376F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +54,15 @@
 		F22A3D2D1D9E0B5C0024376F /* RESTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RESTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22A3D311D9E0B5C0024376F /* RESTUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RESTUITests.m; sourceTree = "<group>"; };
 		F22A3D331D9E0B5C0024376F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F22A3D421D9E0C1D0024376F /* WeatherAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherAPI.h; sourceTree = "<group>"; };
+		F22A3D431D9E0C360024376F /* WeatherHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherHelper.h; sourceTree = "<group>"; };
+		F22A3D441D9E0C360024376F /* WeatherHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherHelper.m; sourceTree = "<group>"; };
+		F22A3D461D9EEBDF0024376F /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherViewController.h; path = ../WeatherViewController.h; sourceTree = "<group>"; };
+		F22A3D471D9EEBDF0024376F /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherViewController.m; path = ../WeatherViewController.m; sourceTree = "<group>"; };
+		F22A3D491D9F1CE40024376F /* WeatherParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherParser.h; sourceTree = "<group>"; };
+		F22A3D4A1D9F1CE40024376F /* WeatherParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherParser.m; sourceTree = "<group>"; };
+		F22A3D4F1DA03A6E0024376F /* WeatherDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailTableViewCell.h; sourceTree = "<group>"; };
+		F22A3D501DA03A6E0024376F /* WeatherDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +115,16 @@
 			children = (
 				F22A3D0C1D9E0B5C0024376F /* AppDelegate.h */,
 				F22A3D0D1D9E0B5C0024376F /* AppDelegate.m */,
-				F22A3D0F1D9E0B5C0024376F /* ViewController.h */,
-				F22A3D101D9E0B5C0024376F /* ViewController.m */,
 				F22A3D121D9E0B5C0024376F /* Main.storyboard */,
+				F22A3D461D9EEBDF0024376F /* WeatherViewController.h */,
+				F22A3D471D9EEBDF0024376F /* WeatherViewController.m */,
+				F22A3D4F1DA03A6E0024376F /* WeatherDetailTableViewCell.h */,
+				F22A3D501DA03A6E0024376F /* WeatherDetailTableViewCell.m */,
+				F22A3D421D9E0C1D0024376F /* WeatherAPI.h */,
+				F22A3D431D9E0C360024376F /* WeatherHelper.h */,
+				F22A3D441D9E0C360024376F /* WeatherHelper.m */,
+				F22A3D491D9F1CE40024376F /* WeatherParser.h */,
+				F22A3D4A1D9F1CE40024376F /* WeatherParser.m */,
 				F22A3D181D9E0B5C0024376F /* Assets.xcassets */,
 				F22A3D1A1D9E0B5C0024376F /* LaunchScreen.storyboard */,
 				F22A3D1D1D9E0B5C0024376F /* Info.plist */,
@@ -276,9 +293,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F22A3D111D9E0B5C0024376F /* ViewController.m in Sources */,
+				F22A3D451D9E0C360024376F /* WeatherHelper.m in Sources */,
+				F22A3D4B1D9F1CE40024376F /* WeatherParser.m in Sources */,
 				F22A3D0E1D9E0B5C0024376F /* AppDelegate.m in Sources */,
 				F22A3D0B1D9E0B5C0024376F /* main.m in Sources */,
+				F22A3D511DA03A6E0024376F /* WeatherDetailTableViewCell.m in Sources */,
+				F22A3D481D9EEBDF0024376F /* WeatherViewController.m in Sources */,
 				F22A3D171D9E0B5C0024376F /* REST.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +531,7 @@
 				F22A3D381D9E0B5C0024376F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F22A3D391D9E0B5C0024376F /* Build configuration list for PBXNativeTarget "RESTTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +540,7 @@
 				F22A3D3B1D9E0B5C0024376F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F22A3D3C1D9E0B5C0024376F /* Build configuration list for PBXNativeTarget "RESTUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +549,7 @@
 				F22A3D3E1D9E0B5C0024376F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
