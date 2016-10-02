@@ -45,7 +45,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 //Setter for data reloads tableview
 - (void)setData:(NSDictionary *)data {
     _data = data;
-    self.currentCityLabel.text = self.weatherParser.lastCitySearched;
+    self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.weatherParser.lastCitySearched];
     [self.tableView reloadData];
 }
 
