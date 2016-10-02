@@ -113,18 +113,9 @@
 		F22A3D081D9E0B5C0024376F /* REST */ = {
 			isa = PBXGroup;
 			children = (
-				F22A3D0C1D9E0B5C0024376F /* AppDelegate.h */,
-				F22A3D0D1D9E0B5C0024376F /* AppDelegate.m */,
-				F22A3D121D9E0B5C0024376F /* Main.storyboard */,
-				F22A3D461D9EEBDF0024376F /* WeatherViewController.h */,
-				F22A3D471D9EEBDF0024376F /* WeatherViewController.m */,
-				F22A3D4F1DA03A6E0024376F /* WeatherDetailTableViewCell.h */,
-				F22A3D501DA03A6E0024376F /* WeatherDetailTableViewCell.m */,
-				F22A3D421D9E0C1D0024376F /* WeatherAPI.h */,
-				F22A3D431D9E0C360024376F /* WeatherHelper.h */,
-				F22A3D441D9E0C360024376F /* WeatherHelper.m */,
-				F22A3D491D9F1CE40024376F /* WeatherParser.h */,
-				F22A3D4A1D9F1CE40024376F /* WeatherParser.m */,
+				F22A3D531DA13EB50024376F /* View */,
+				F22A3D521DA13E840024376F /* ViewControllers */,
+				F22A3D541DA13EBB0024376F /* Helpers */,
 				F22A3D181D9E0B5C0024376F /* Assets.xcassets */,
 				F22A3D1A1D9E0B5C0024376F /* LaunchScreen.storyboard */,
 				F22A3D1D1D9E0B5C0024376F /* Info.plist */,
@@ -137,6 +128,8 @@
 		F22A3D091D9E0B5C0024376F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F22A3D0C1D9E0B5C0024376F /* AppDelegate.h */,
+				F22A3D0D1D9E0B5C0024376F /* AppDelegate.m */,
 				F22A3D0A1D9E0B5C0024376F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -158,6 +151,37 @@
 				F22A3D331D9E0B5C0024376F /* Info.plist */,
 			);
 			path = RESTUITests;
+			sourceTree = "<group>";
+		};
+		F22A3D521DA13E840024376F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F22A3D461D9EEBDF0024376F /* WeatherViewController.h */,
+				F22A3D471D9EEBDF0024376F /* WeatherViewController.m */,
+				F22A3D4F1DA03A6E0024376F /* WeatherDetailTableViewCell.h */,
+				F22A3D501DA03A6E0024376F /* WeatherDetailTableViewCell.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F22A3D531DA13EB50024376F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F22A3D121D9E0B5C0024376F /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F22A3D541DA13EBB0024376F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F22A3D421D9E0C1D0024376F /* WeatherAPI.h */,
+				F22A3D431D9E0C360024376F /* WeatherHelper.h */,
+				F22A3D441D9E0C360024376F /* WeatherHelper.m */,
+				F22A3D491D9F1CE40024376F /* WeatherParser.h */,
+				F22A3D4A1D9F1CE40024376F /* WeatherParser.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

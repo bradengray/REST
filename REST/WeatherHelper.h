@@ -11,6 +11,7 @@
 
 @interface WeatherHelper : NSObject
 
-+ (NSURL *)urlForCity:(NSString *)city;
+//Class method
++ (NSURL *)urlForCity:(NSString *)city; //Returns url for city name
 
 @end

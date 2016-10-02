@@ -10,17 +10,18 @@
 
 @interface WeatherDetailTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
-@property (weak, nonatomic) IBOutlet UILabel *windLabel;
-@property (weak, nonatomic) IBOutlet UILabel *humidityLabel;
-@property (weak, nonatomic) IBOutlet UILabel *weatherDetailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel; //Label designated for time
+@property (weak, nonatomic) IBOutlet UILabel *tempLabel; //Label designated for temp
+@property (weak, nonatomic) IBOutlet UILabel *windLabel; //Label designated for wind
+@property (weak, nonatomic) IBOutlet UILabel *humidityLabel; //Label designated for humidity
+@property (weak, nonatomic) IBOutlet UILabel *weatherDetailLabel; //Label designated for weather
 
 
 @end
 
 @implementation WeatherDetailTableViewCell
 
+//Sets text for the designated labels
 - (void)setTimeText:(NSString *)text {
     self.timeLabel.text = text;
 }

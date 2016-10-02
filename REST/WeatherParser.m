@@ -8,24 +8,29 @@
 
 #import "WeatherParser.h"
 
+//Keys for pulling data from json Object
+#define CITY_RESULTS @"city.name"
 #define DATE_RESULTS @"list.dt"
 #define TEMP_RESULTS @"list.main.temp"
 #define WIND_RESULTS @"list.wind.speed"
 #define HUMIDITY_RESULTS @"list.main.humidity"
 #define WEATHER_RESULTS @"list.weather.description"
-#define DATE_KEY @"date"
-#define TIME_KEY @"time"
-#define TEMP_KEY @"temp"
-#define WIND_KEY @"wind"
-#define HUMIDITY_KEY @"humidity"
-#define WEATHER_KEY @"weather"
+
+@interface WeatherParser ()
+
+@property (nonatomic, strong, readwrite) NSString *lastCitySearched; //Writes to last city searched
+
+@end
 
 @implementation WeatherParser
 
+//Returns dictionary for data
 - (NSDictionary *)fiveDayForcastForData:(NSData *)data {
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
     NSMutableArray *dateAndTempArray;
     if (dictionary) {
+        NSString *city = [dictionary valueForKeyPath:CITY_RESULTS];
+        self.lastCitySearched = city;
         dateAndTempArray = [[NSMutableArray alloc] init];
         NSArray *dates = [dictionary valueForKeyPath:DATE_RESULTS];
         dates = [self datesWithArray:dates];
@@ -50,6 +55,7 @@
     return [self filterdByDateFromArray:dateAndTempArray];
 }
 
+//Filters array into dictionary by day
 - (NSDictionary *)filterdByDateFromArray:(NSArray *)array {
     NSMutableDictionary *sortedDictionary = [[NSMutableDictionary alloc] init];
     for (NSDictionary *dict in array) {
@@ -68,6 +74,8 @@
     return sortedDictionary;
 }
 
+//Returns array of dictionaries. Dictionaries contain 2 values day and time
+//@[@{Day: string, Time : string}, etc...]
 - (NSArray *)datesWithArray:(NSArray *)dates {
     NSMutableArray *newDates;
     if (dates) {
@@ -91,6 +99,7 @@
     return newDates;
 }
 
+//Returns array of temps in farenheight strings
 - (NSArray *)fahrenheitTempsWithArray:(NSArray *)temps {
     NSMutableArray *newTemps;
     if (temps) {
@@ -104,6 +113,7 @@
     return newTemps;
 }
 
+//Returns array of wind speeds in mph
 - (NSArray *)windSpeedsInMPHWithArray:(NSArray *)winds {
     NSMutableArray *newSpeeds;
     if (winds) {
@@ -117,6 +127,7 @@
     return newSpeeds;
 }
 
+//Returns Humidity as a percentage
 - (NSArray *)humidityPercentWithArray:(NSArray *)humidities {
     NSMutableArray *newHumidity;
     if (humidities) {
@@ -129,14 +140,17 @@
     return newHumidity;
 }
 
+//Returns array of weather description strings
 - (NSArray *)weatherStringsWithArray:(NSArray *)descriptions {
     NSMutableArray *newDescriptions;
     if (descriptions) {
         newDescriptions = [[NSMutableArray alloc] init];
         for (id object in descriptions) {
-            
-            NSString *description = (NSString *)object;
-            [newDescriptions addObject:[NSString stringWithFormat:@"%@", description]];
+            if ([object isKindOfClass:[NSArray class]]) {
+                NSArray *array = (NSArray *)object;
+                NSString *description = array[0];
+                [newDescriptions addObject:[NSString stringWithFormat:@"%@", description]];
+            }
         }
     }
     return newDescriptions;

@@ -10,6 +10,7 @@
 
 @interface WeatherDetailTableViewCell : UITableViewCell
 
+//Sets texts for different labels in custom cells
 - (void)setTimeText:(NSString *)text;
 - (void)setTempText:(NSString *)text;
 - (void)setWindText:(NSString *)text;

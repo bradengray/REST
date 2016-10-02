@@ -9,6 +9,7 @@
 #ifndef WeatherAPI_h
 #define WeatherAPI_h
 
+//Holds weather API key
 #define WEATHER_API_KEY @"82e998eaf183e7107efb3b1731060958"
 
 
