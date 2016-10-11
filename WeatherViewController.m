@@ -8,28 +8,29 @@
 
 #import "WeatherViewController.h"
 #import "WeatherDetailTableViewCell.h"
+#import "WeatherFetcher.h"
 #import "WeatherHelper.h"
-#import "WeatherParser.h"
+#import "City+CoreDataClass.h"
+#import "Forecast+CoreDataClass.h"
+#import "Hour+CoreDataClass.h"
+#import "Day+CoreDataClass.h"
+#import "Weather+CoreDataClass.h"
+#import "AppDelegate.h"
 
 @interface WeatherViewController () <NSURLSessionDownloadDelegate>
 
-@property (nonatomic, strong) NSDictionary *data; //Holds dictionary data
-@property (nonatomic, strong) WeatherParser *weatherParser; //Data parsing object
 @property (weak, nonatomic) IBOutlet UITextField *cityTextField; //Textfield for search
 @property (weak, nonatomic) IBOutlet UITableView *tableView; //My tableView
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator; //Downloading activity
 @property (weak, nonatomic) IBOutlet UILabel *currentCityLabel;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) City *city;
 
 @end
 
 @implementation WeatherViewController
 
 #pragma mark - Properties
-
-//Returns sorted section titles
-- (NSArray *)sectionTitles {
-    return [[self.data allKeys] sortedArrayUsingFunction:dateSort context:nil];
-}
 
 //Sorts dates format in EEEE, MMM d format
 NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context) {
@@ -42,39 +43,69 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
     return [date1 compare:date2];
 }
 
-//Setter for data reloads tableview
-- (void)setData:(NSDictionary *)data {
-    _data = data;
-    self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.weatherParser.lastCitySearched];
+
+- (void)setCity:(City *)city {
+    _city = city;
     [self.tableView reloadData];
 }
 
-//Lazy instantiate parser object
-- (WeatherParser *)weatherParser {
-    if (!_weatherParser) {
-        _weatherParser = [[WeatherParser alloc] init];
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
+//Lazy instantiate context
+- (NSManagedObjectContext *)context {
+    if (!_context) {
+        _context = [self appDelegate].persistentContainer.viewContext;
     }
-    return _weatherParser;
+    return _context;
 }
 
 #pragma mark - Button
 
-//Search button touched. Dismiss keyboard and start data fetch
+//Search button touched. Dissmiss keyboard and start data fetch
 - (IBAction)buttonTouched:(UIButton *)sender {
-    [self.cityTextField resignFirstResponder];
-    [self fetchWeatherForCity:self.cityTextField.text];
+    [self searchDataBaseForWeatherForCity:self.cityTextField.text];
+}
+
+#pragma mark - Search
+
+- (void)searchDataBaseForWeatherForCity:(NSString *)city {
+    if ([city isEqualToString:@""]) {
+        return;
+    }
+    NSArray *components = [city componentsSeparatedByCharactersInSet:[NSCharacterSet punctuationCharacterSet]];
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"City"];
+    request.predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", [components firstObject]];
+    
+    NSArray *results = [self.context executeFetchRequest:request error:&error];
+    if (!error) {
+        if ([results count] > 0) {
+            City *storedCity = [results firstObject];
+            NSDate *time = storedCity.forecast.posted;
+            NSTimeInterval timeSincePosted = [[NSDate date] timeIntervalSinceDate:time];
+            if (timeSincePosted < 60) {
+                self.city = storedCity;
+            } else {
+                [self fetchWeatherForCity:city];
+            }
+        } else {
+            [self fetchWeatherForCity:city];
+        }
+    } else {
+        //Try to reload the city into coreData;
+        NSLog(@"Error:%@", error.localizedDescription);
+        [self fetchWeatherForCity:city];
+    }
 }
 
 #pragma mark - Fetch
 
 //Fetch the weater for a given city
 - (void)fetchWeatherForCity:(NSString *)city {
-    if ([city isEqualToString:@""]) {
-        return;
-    }
-    self.data = nil;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
-    NSURLSessionDownloadTask *task = [session downloadTaskWithURL:[WeatherHelper urlForCity:city]];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithURL:[WeatherFetcher urlForCity:city]];
     [self.activityIndicator startAnimating];
     [task resume];
 }
@@ -94,11 +125,22 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
         if (data) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //Store in core data
-                self.data = [self.weatherParser fiveDayForcastForData:data];
                 [self.activityIndicator stopAnimating];
+                [self updateDataBase:[WeatherHelper fiveDayForcastInfoForData:data]];
+                self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.city.name];
             });
         }
     }
+}
+
+- (void)updateDataBase:(NSDictionary *)data {
+    [self.context performBlock:^{
+        City *currentCity = [City cityForWeatherInfo:data inManagedObjectContext:self.context];
+        [[self appDelegate] saveContext];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.city = currentCity;
+        });
+    }];
 }
 
 #pragma mark - TabelViewDelegate Methods
@@ -112,30 +154,86 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 
 //Table view number of sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.data count];
+    if (self.city != nil) {
+        return [self.city.forecast.days count];
+    } else {
+        return 0;
+    }
 }
 
 //Title for section headers
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[self sectionTitles] objectAtIndex:section];
+    if (self.city != nil) {
+        Day *day = [self dayForSection:section];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateFormat:@"EEEE, MMM d"];
+        NSString *string = [formatter stringFromDate:day.date];
+        NSLog(@"%@", string);
+        return string;
+    }
+    return nil;
+}
+
+- (Day *)dayForSection:(NSInteger)section {
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY forecast == %@", self.city.forecast];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)]];
+    NSArray *days = [self.city.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!error) {
+        if ([days count] > 0) {
+            return days[section];
+        }
+    }
+    return nil;
+}
+
+- (Hour *)hourForIndexPath:(NSIndexPath *)indexPath {
+    Day *day = [self dayForSection:indexPath.section];
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
+    request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
+    
+    NSArray *hours = [self.city.managedObjectContext executeFetchRequest:request error:&error];
+    if (!error) {
+        if ([hours count] > 0) {
+            return hours[indexPath.row];
+        }
+    }
+    return nil;
 }
 
 //Table view number of rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.data objectForKey:[[self sectionTitles] objectAtIndex:section]] count];
+    if (self.city != nil) {
+        Day *day = [self dayForSection:section];
+        if (day) {
+            return day.hours.count;
+        }
+    }
+    return 0;
 }
 
 //Table view cell for row uses WeatherDetailTableViewCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WeatherDetailTableViewCell *cell = (WeatherDetailTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"Cell1"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSDictionary *cellDictionary = [[self.data objectForKey:[[self sectionTitles] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    Hour *hour = [self hourForIndexPath:indexPath];
     
-    [cell setTimeText:[cellDictionary objectForKey:TIME_KEY]];
-    [cell setTempText:[NSString stringWithFormat:@"Temp: %@", [cellDictionary objectForKey:TEMP_KEY]]];
-    [cell setWindText:[NSString stringWithFormat:@"Wind: %@", [cellDictionary objectForKey:WIND_KEY]]];
-    [cell setHumidityText:[NSString stringWithFormat:@"Humidity: %@", [cellDictionary objectForKey:HUMIDITY_KEY]]];
-    [cell setWeatherDetailText:[cellDictionary objectForKey:WEATHER_KEY]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateFormat:@"h:mm a"];
+    NSString *time = [formatter stringFromDate:hour.time];
+    
+    [cell setTimeText:time];
+    [cell setTempText:[NSString stringWithFormat:@"Temp %.0f", hour.weather.temp]];
+    [cell setHumidityText:[NSString stringWithFormat:@"Humidity %.0f%%", hour.weather.humidity]];
+    [cell setWindText:[NSString stringWithFormat:@"Wind %.0f", hour.weather.windSpeed]];
+    [cell setWeatherDetailText:hour.weather.weatherDescription];
     
     return cell;
 }
@@ -150,7 +248,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 
 //Called when text field ends editing
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self fetchWeatherForCity:textField.text];
+    [self searchDataBaseForWeatherForCity:textField.text];
 }
 
 @end
