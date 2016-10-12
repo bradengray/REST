@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Weather : NSManagedObject
 
+//Stores and returns Weather object in Core Data for info
 + (Weather *)weatherForHour:(Hour *)hour withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

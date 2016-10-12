@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Forecast : NSManagedObject
 
-+ (Forecast *)forcastForWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context;
+//Stores and returns Forecast object in Core Data for info
++ (Forecast *)forcastForCity:(City *)city withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 

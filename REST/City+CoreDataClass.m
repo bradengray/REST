@@ -12,6 +12,7 @@
 
 @implementation City
 
+//Stores and returns City object in Core Data for info
 + (City *)cityForWeatherInfo:(NSDictionary *)info inManagedObjectContext:(NSManagedObjectContext *)context {
     NSError *error;
     NSNumber *identifier = [WeatherHelper extractCityIDForInfo:info];
@@ -22,13 +23,15 @@
     NSArray *results = [context executeFetchRequest:request error:&error];
     if (!error) {
         if ([results count] > 0) {
+            //Update forecast and return city
             City *city = [results firstObject];
             NSTimeInterval timeSinceUpdated = [[NSDate date] timeIntervalSinceDate:city.forecast.posted];
             if (timeSinceUpdated > 60 * 60) {
-                city.forecast = [Forecast forcastForWeatherInfo:info inNSManagedObjectContext:context];
+                city.forecast = [Forecast forcastForCity:city withWeatherInfo:info inNSManagedObjectContext:context];
             }
-            
+            return city;
         } else {
+            //Create new City
             City *city = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:context];
             city.identifier = [identifier stringValue];
             city.name = [WeatherHelper extractCityNameForInfo:info];
@@ -36,7 +39,7 @@
             NSDictionary *coordinates = [WeatherHelper extractCityCoordinatesForInfo:info];
             city.latitude = [[coordinates objectForKey:LATITUTE_COORDINATE_KEY] floatValue];
             city.longitude = [[coordinates objectForKey:LONGITUDE_COORDINATE_KEY] floatValue];
-            city.forecast = [Forecast forcastForWeatherInfo:info inNSManagedObjectContext:context];
+            city.forecast = [Forecast forcastForCity:city withWeatherInfo:info inNSManagedObjectContext:context];
             
             return city;
         }

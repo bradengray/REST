@@ -73,6 +73,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 
 //Search database to see if current city already exists
 - (void)searchDataBaseForWeatherForCity:(NSString *)city {
+    self.city = nil;
     if ([city isEqualToString:@""]) {
         return;
     }
@@ -240,7 +241,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
     request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
     
-    NSArray *hours = [self.city.managedObjectContext executeFetchRequest:request error:&error];
+    NSMutableArray *hours = [[self.city.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
     if (!error) {
         if ([hours count] > 0) {
             return hours[indexPath.row];

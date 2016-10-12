@@ -15,7 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Hour : NSManagedObject
 
+//Stores and returns Hour object in Core Data for info
 + (NSSet *)hoursForDay:(Day *)day withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context;
+//Deletes any hours older than now
++ (void)deleteHoursForDay:(Day *)day olderThanNowInNSManagedContext:(NSManagedObjectContext *)context;
+//Deletes Hour object
++ (void)deleteHour:(Hour *)hour;
 
 @end
 

@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Day : NSManagedObject
 
+//Stores and returns Day object in Core Data for info
 + (NSSet *)daysForForecast:(Forecast *)forecast withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context;
+//Deletes any Day objects that are older than today
++ (void)deleteDaysOlderThanTodayInNSManagedContext:(NSManagedObjectContext *)context;
 
 @end
 
