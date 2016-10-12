@@ -22,7 +22,12 @@
     NSArray *results = [context executeFetchRequest:request error:&error];
     if (!error) {
         if ([results count] > 0) {
-            return [results firstObject];
+            City *city = [results firstObject];
+            NSTimeInterval timeSinceUpdated = [[NSDate date] timeIntervalSinceDate:city.forecast.posted];
+            if (timeSinceUpdated > 60 * 60) {
+                city.forecast = [Forecast forcastForWeatherInfo:info inNSManagedObjectContext:context];
+            }
+            
         } else {
             City *city = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:context];
             city.identifier = [identifier stringValue];

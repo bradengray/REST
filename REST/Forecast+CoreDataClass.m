@@ -21,8 +21,10 @@
         if ([results count] > 0) {
             Forecast *forecast = [results firstObject];
             NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:forecast.posted];
-            if (time > (60 * 30)) {
-                createNew = YES;
+            if (time > (60 * 60)) {
+                forecast.posted = [NSDate date];
+                NSSet *days = [Day daysForForecast:forecast withWeatherInfo:info inNSManagedObjectContext:context];
+                [forecast addDays:days];
             } else {
                 return [results firstObject];
             }

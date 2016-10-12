@@ -13,8 +13,11 @@
 @implementation Hour
 
 + (NSSet *)hoursForDay:(Day *)day withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context {
+    [Hour deleteHoursAndWeatherOlderThanNowForContext:context];
+    
     NSError *error;
-    NSArray *times = [WeatherHelper extractForecastDaysAsNSDatesForInfo:info];
+    NSArray *dates = [WeatherHelper extractHoursForDay:day.date withInfo:info];
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
     request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
     
@@ -26,7 +29,7 @@
             for (Hour *hour in results) {
                 [storedHours addObject:hour.time];
             }
-            for (NSDate *time in times) {
+            for (NSDate *time in dates) {
                 if (![storedHours containsObject:time]) {
                     Hour *hour = [NSEntityDescription insertNewObjectForEntityForName:@"Hour" inManagedObjectContext:context];
                     hour.time = time;
@@ -36,7 +39,7 @@
             }
             return hours;
         } else {
-            for (NSDate *time in times) {
+            for (NSDate *time in dates) {
                 Hour *hour = [NSEntityDescription insertNewObjectForEntityForName:@"Hour" inManagedObjectContext:context];
                 hour.time = time;
                 hour.weather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
@@ -49,6 +52,23 @@
         NSLog(@"Error:%@", error.localizedDescription);
     }
     return nil;
+}
+
++ (void)deleteHoursAndWeatherOlderThanNowForContext:(NSManagedObjectContext *)context {
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
+    
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    if (!error) {
+        if ([results count]) {
+            for (Hour *hour in results) {
+                if (hour.time < [NSDate date]) {
+                    [context deleteObject:hour.weather];
+                    [context deleteObject:hour];
+                }
+            }
+        }
+    }
 }
 
 @end

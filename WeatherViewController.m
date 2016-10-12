@@ -12,8 +12,8 @@
 #import "WeatherHelper.h"
 #import "City+CoreDataClass.h"
 #import "Forecast+CoreDataClass.h"
-#import "Hour+CoreDataClass.h"
 #import "Day+CoreDataClass.h"
+#import "Hour+CoreDataClass.h"
 #import "Weather+CoreDataClass.h"
 #import "AppDelegate.h"
 
@@ -22,9 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *cityTextField; //Textfield for search
 @property (weak, nonatomic) IBOutlet UITableView *tableView; //My tableView
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator; //Downloading activity
-@property (weak, nonatomic) IBOutlet UILabel *currentCityLabel;
-@property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) City *city;
+@property (weak, nonatomic) IBOutlet UILabel *currentCityLabel; //Label for current city
+@property (nonatomic, strong) NSManagedObjectContext *context; //Core Data context
+@property (nonatomic, strong) City *city; //City object
 
 @end
 
@@ -43,12 +43,13 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
     return [date1 compare:date2];
 }
 
-
+//Reload tableview when new city is set
 - (void)setCity:(City *)city {
     _city = city;
     [self.tableView reloadData];
 }
 
+//Returns the object for the app delegate. Used to get context and persistenceCoordinator
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
@@ -70,6 +71,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 
 #pragma mark - Search
 
+//Search database to see if current city already exists
 - (void)searchDataBaseForWeatherForCity:(NSString *)city {
     if ([city isEqualToString:@""]) {
         return;
@@ -85,8 +87,11 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
             City *storedCity = [results firstObject];
             NSDate *time = storedCity.forecast.posted;
             NSTimeInterval timeSincePosted = [[NSDate date] timeIntervalSinceDate:time];
-            if (timeSincePosted < 60) {
+            if (timeSincePosted < 60 * 60) {
                 self.city = storedCity;
+                if (self.city.name) {
+                    self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.city.name];
+                }
             } else {
                 [self fetchWeatherForCity:city];
             }
@@ -102,7 +107,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
 
 #pragma mark - Fetch
 
-//Fetch the weater for a given city
+//Fetch the weather for a given city
 - (void)fetchWeatherForCity:(NSString *)city {
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
     NSURLSessionDownloadTask *task = [session downloadTaskWithURL:[WeatherFetcher urlForCity:city]];
@@ -127,18 +132,21 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
                 //Store in core data
                 [self.activityIndicator stopAnimating];
                 [self updateDataBase:[WeatherHelper fiveDayForcastInfoForData:data]];
-                self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.city.name];
             });
         }
     }
 }
 
+//Updates database
 - (void)updateDataBase:(NSDictionary *)data {
     [self.context performBlock:^{
         City *currentCity = [City cityForWeatherInfo:data inManagedObjectContext:self.context];
         [[self appDelegate] saveContext];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.city = currentCity;
+            if (self.city.name) {
+                self.currentCityLabel.text = [NSString stringWithFormat:@"5 Day Forecast For %@", self.city.name];
+            }
         });
     }];
 }
@@ -169,39 +177,7 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
         [formatter setLocale:[NSLocale currentLocale]];
         [formatter setDateFormat:@"EEEE, MMM d"];
         NSString *string = [formatter stringFromDate:day.date];
-        NSLog(@"%@", string);
         return string;
-    }
-    return nil;
-}
-
-- (Day *)dayForSection:(NSInteger)section {
-    NSError *error;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
-    request.predicate = [NSPredicate predicateWithFormat:@"ANY forecast == %@", self.city.forecast];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)]];
-    NSArray *days = [self.city.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if (!error) {
-        if ([days count] > 0) {
-            return days[section];
-        }
-    }
-    return nil;
-}
-
-- (Hour *)hourForIndexPath:(NSIndexPath *)indexPath {
-    Day *day = [self dayForSection:indexPath.section];
-    NSError *error;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
-    request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
-    
-    NSArray *hours = [self.city.managedObjectContext executeFetchRequest:request error:&error];
-    if (!error) {
-        if ([hours count] > 0) {
-            return hours[indexPath.row];
-        }
     }
     return nil;
 }
@@ -230,12 +206,47 @@ NSComparisonResult dateSort(NSString *string1, NSString *string2, void *context)
     NSString *time = [formatter stringFromDate:hour.time];
     
     [cell setTimeText:time];
-    [cell setTempText:[NSString stringWithFormat:@"Temp %.0f", hour.weather.temp]];
+    [cell setTempText:[NSString stringWithFormat:@"Temp %.0f deg", hour.weather.temp]];
     [cell setHumidityText:[NSString stringWithFormat:@"Humidity %.0f%%", hour.weather.humidity]];
-    [cell setWindText:[NSString stringWithFormat:@"Wind %.0f", hour.weather.windSpeed]];
-    [cell setWeatherDetailText:hour.weather.weatherDescription];
+    [cell setWindText:[NSString stringWithFormat:@"Wind %.0f mph", hour.weather.windSpeed]];
+    [cell setWeatherDetailText:[NSString stringWithFormat:@"Details: %@", hour.weather.weatherDescription]];
     
     return cell;
+}
+
+#pragma mark - TableView Helper Methods
+
+//Returns day object for section
+- (Day *)dayForSection:(NSInteger)section {
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY forecast == %@", self.city.forecast];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES selector:@selector(compare:)]];
+    NSArray *days = [self.city.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!error) {
+        if ([days count] > 0) {
+            return days[section];
+        }
+    }
+    return nil;
+}
+
+//Returns hour object for indexPath
+- (Hour *)hourForIndexPath:(NSIndexPath *)indexPath {
+    Day *day = [self dayForSection:indexPath.section];
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
+    request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
+    
+    NSArray *hours = [self.city.managedObjectContext executeFetchRequest:request error:&error];
+    if (!error) {
+        if ([hours count] > 0) {
+            return hours[indexPath.row];
+        }
+    }
+    return nil;
 }
 
 #pragma mark - UITextFieldDelegate Methods

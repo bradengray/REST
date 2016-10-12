@@ -23,7 +23,6 @@
 //Returns dictionary for data
 + (NSDictionary *)fiveDayForcastInfoForData:(NSData *)data { //Returns 5 day forecast dictionary
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-    NSLog(@"%@", dictionary);
     return dictionary;
 }
 

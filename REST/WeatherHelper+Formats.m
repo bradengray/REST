@@ -25,24 +25,55 @@
 + (NSArray *)extractForecastDaysAsNSDatesForInfo:(NSDictionary *)info { //Returns days for 5 day forecast as NSDates
     NSArray * dates = [WeatherHelper extractForecastDatesAsNSDatesForInfo:info];
     
-    NSMutableArray *days = [[NSMutableArray alloc] init];
-    
-    NSDateFormatter *formatter= [[NSDateFormatter alloc] init];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateFormat:@"EEEE, MMM d"];
-    
-    for (NSDate *date in dates) {
-        NSString *dateString = [formatter stringFromDate:date];
-        if (![days containsObject:dateString]) {
-            [days addObject:dateString];
+    if (dates) {
+        NSMutableArray *days = [[NSMutableArray alloc] init];
+        
+        for (NSDate *date in dates) {
+            if ([days count]) {
+                int count = 0;
+                for (NSDate *day in days) {
+                    if (![WeatherHelper isSameDayWithDate1:day date2:date]) {
+                        count ++;
+                    }
+                }
+                if ([days count] == count) {
+                    [days addObject:date];
+                }
+            } else {
+                [days addObject:date];
+            }
         }
+        return days;
     }
-    NSMutableArray *daysAsNSDates = [[NSMutableArray alloc] init];
-    for (NSString *day in days) {
-        NSDate *date = [formatter dateFromString:day];
-        [daysAsNSDates addObject:date];
+    return nil;
+}
+
++ (NSArray *)extractHoursForDay:(NSDate *)day withInfo:(NSDictionary *)info { //Returns array of NSDates that occured that same day as the given day
+    NSArray *dates = [WeatherHelper extractForecastDatesAsNSDatesForInfo:info];
+    
+    if (dates) {
+        NSMutableArray *hours = [[NSMutableArray alloc] init];
+        
+        for (NSDate *date in dates) {
+            if ([WeatherHelper isSameDayWithDate1:day date2:date]) {
+                [hours addObject:date];
+            }
+        }
+        return hours;
     }
-    return daysAsNSDates;
+    return nil;
+}
+
++ (BOOL)isSameDayWithDate1:(NSDate*)date1 date2:(NSDate*)date2 { //Returns yes if dates are in the same day
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+    
+    return [comp1 day]   == [comp2 day] &&
+    [comp1 month] == [comp2 month] &&
+    [comp1 year]  == [comp2 year];
 }
 
 + (NSNumber *)extractTempAsFarenheitForTime:(NSDate *)time withWeatherInfo:(NSDictionary *)info { //Returns temp as Farenheight For time as NSNumber
