@@ -78,8 +78,7 @@
         if ([results count]) {
             NSMutableSet *oldhours = [[NSMutableSet alloc] init];
             for (Hour *hour in results) {
-                NSLog(@"%@", hour.time);
-                if (hour.time < [NSDate date]) {
+                if ([hour.time timeIntervalSinceNow] < 0) {
                     [oldhours addObject:hour];
                 }
             }

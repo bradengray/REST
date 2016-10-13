@@ -21,7 +21,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
     request.predicate = [NSPredicate predicateWithFormat:@"forecast == %@", forecast];
     
-    NSArray *results = [context executeFetchRequest:request error:&error];
+    NSMutableArray *results = [[context executeFetchRequest:request error:&error] mutableCopy];
     if (!error) {
         NSMutableSet *newDays = [[NSMutableSet alloc] init];
         if ([results count] > 0) {
@@ -30,6 +30,14 @@
                 int count = 0;
                 for (Day *day in results) {
                     if (![self isSameDayWithDate1:date date2:day.date]) {
+                        if (![self isSameDayWithDate1:[NSDate date] date2:day.date]) {
+                            if ([day.date timeIntervalSinceNow] < 0) {
+                                for (Hour *hour in day.hours) {
+                                    [Hour deleteHour:hour];
+                                }
+                                [context deleteObject:day];
+                            }
+                        }
                         count++;
                     } else {
                         //Delete old hours
@@ -69,28 +77,6 @@
         NSLog(@"Error:%@", error.localizedDescription);
     }
     return nil;
-}
-
-//Deletes any days older than today
-+ (void)deleteDaysOlderThanTodayInNSManagedContext:(NSManagedObjectContext *)context {
-    NSError *error;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
-    
-    NSArray *results = [context executeFetchRequest:request error:&error];
-    if (!error) {
-        if ([results count]) {
-            for (Day * day in results) {
-                if (![self isSameDayWithDate1:day.date date2:[NSDate date]]) {
-                    if (day.date < [NSDate date]) {
-                        for (Hour *hour in day.hours) {
-                            [Hour deleteHour:hour];
-                        }
-                        [context deleteObject:day];
-                    }
-                }
-            }
-        }
-    }
 }
 
 //Checks to see if dates occur on the say day

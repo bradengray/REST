@@ -14,8 +14,8 @@
 //Stores and returns Forecast object in Core Data for info
 + (Forecast *)forcastForCity:(City *)city withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context {
     
-    //Delete any days older than today
-    [Day deleteDaysOlderThanTodayInNSManagedContext:context];
+//    //Delete any days older than today
+//    [Day deleteDaysOlderThanTodayInNSManagedContext:context];
     
     NSError *error;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Forecast"];
