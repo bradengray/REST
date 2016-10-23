@@ -2,7 +2,7 @@
 //  Day+CoreDataProperties.h
 //  REST
 //
-//  Created by Braden Gray on 10/9/16.
+//  Created by Braden Gray on 10/22/16.
 //  Copyright © 2016 Graycode. All rights reserved.
 //
 
@@ -16,8 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<Day *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSDate *date;
-@property (nullable, nonatomic, retain) NSSet<Hour *> *hours;
 @property (nullable, nonatomic, retain) Forecast *forecast;
+@property (nullable, nonatomic, retain) NSSet<Hour *> *hours;
+@property (nullable, nonatomic, retain) Weather *dailyWeather;
 
 @end
 

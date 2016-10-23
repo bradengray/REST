@@ -25,10 +25,7 @@
         if ([results count] > 0) {
             //Update forecast and return city
             City *city = [results firstObject];
-            NSTimeInterval timeSinceUpdated = [[NSDate date] timeIntervalSinceDate:city.forecast.posted];
-            if (timeSinceUpdated > 60 * 60) {
-                city.forecast = [Forecast forcastForCity:city withWeatherInfo:info inNSManagedObjectContext:context];
-            }
+            city.forecast = [Forecast forcastForCity:city withWeatherInfo:info inNSManagedObjectContext:context];
             return city;
         } else {
             //Create new City
@@ -37,8 +34,8 @@
             city.name = [WeatherHelper extractCityNameForInfo:info];
             city.country = [WeatherHelper extractCitysCountryForInfo:info];
             NSDictionary *coordinates = [WeatherHelper extractCityCoordinatesForInfo:info];
-            city.latitude = [[coordinates objectForKey:LATITUTE_COORDINATE_KEY] floatValue];
-            city.longitude = [[coordinates objectForKey:LONGITUDE_COORDINATE_KEY] floatValue];
+            city.latitude = [[coordinates objectForKey:LATITUTE_COORDINATE_KEY] doubleValue];
+            city.longitude = [[coordinates objectForKey:LONGITUDE_COORDINATE_KEY] doubleValue];
             city.forecast = [Forecast forcastForCity:city withWeatherInfo:info inNSManagedObjectContext:context];
             
             return city;

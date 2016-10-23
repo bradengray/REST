@@ -1,79 +1,52 @@
 //
-//  WeatherParser2.m
+//  WeatherHelper.m
 //  REST
 //
-//  Created by Braden Gray on 10/9/16.
+//  Created by Braden Gray on 10/17/16.
 //  Copyright © 2016 Graycode. All rights reserved.
 //
 
 #import "WeatherHelper.h"
 
-#define CITY_ID @"city.id"
-#define CITY_NAME @"city.name"
-#define CITY_COORDINATES @"city.coord"
-#define CITYS_COUNTRY @"city.country"
-#define DATE_RESULTS @"list.dt"
-#define TEMP_RESULTS @"list.main.temp"
-#define WIND_RESULTS @"list.wind.speed"
-#define HUMIDITY_RESULTS @"list.main.humidity"
-#define WEATHER_RESULTS @"list.weather.description"
+//Keys for current weather data
+#define CITY_ID_KEY @"id"
+#define CITY_NAME_KEY @"name"
+#define CITY_COORDINATES_KEY @"coord"
+#define CITY_COUNTRY_KEY @"country"
 
 @implementation WeatherHelper
 
-//Returns dictionary for data
-+ (NSDictionary *)fiveDayForcastInfoForData:(NSData *)data { //Returns 5 day forecast dictionary
-    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-    return dictionary;
-}
 
 + (NSNumber *)extractCityIDForInfo:(NSDictionary *)info { //Returns city ID as String
-    return [info valueForKeyPath:CITY_ID];
+    return [info valueForKeyPath:[self keyPathWithKey:CITY_ID_KEY forType:[info valueForKey:DATA_TYPE]]];
 }
 
 + (NSString *)extractCityNameForInfo:(NSDictionary *)info { //Returns city name as string
-    return [info valueForKeyPath:CITY_NAME];
+    return [info valueForKeyPath:[self keyPathWithKey:CITY_NAME_KEY forType:[info valueForKey:DATA_TYPE]]];
 }
 
 + (NSDictionary *)extractCityCoordinatesForInfo:(NSDictionary *)info { //Returns dictionary contianing latitude and longitude for city
-    return [info valueForKeyPath:CITY_COORDINATES];
+    return [info valueForKeyPath:[self keyPathWithKey:CITY_COORDINATES_KEY forType:[info valueForKey:DATA_TYPE]]];
 }
 
-+ (NSString *)extractCitysCountryForInfo:(NSDictionary *)info { //Returns country for city as string
-    return [info valueForKeyPath:CITYS_COUNTRY];
++ (NSDictionary *)extractCitysCountryForInfo:(NSDictionary *)info { //Returns dictionary containing the city's country as a string
+    return [info valueForKeyPath:[self keyPathWithKey:CITY_COUNTRY_KEY forType:[info valueForKey:DATA_TYPE]]];
 }
 
-+ (NSArray *)extractForecastDatesForInfo:(NSDictionary *)info { //Returns forcast date as NSNumber
-    return [info valueForKeyPath:DATE_RESULTS];
+#pragma mark - Helper Methods
+
++ (NSArray *)cityArray { //Holds array of keys for city keypath
+    return @[CITY_ID_KEY, CITY_NAME_KEY, CITY_COORDINATES_KEY, CITY_COUNTRY_KEY];
 }
 
-+ (NSArray *)extractHumiditiesForInfo:(NSDictionary *)info { //Returns humidities for forecast as NSNumbers
-    return [info valueForKeyPath:HUMIDITY_RESULTS];
-}
-
-+ (NSArray *)extractTempsForInfo:(NSDictionary *)info { //Returns temps for forecast as NSNumbers
-    return [info valueForKeyPath:TEMP_RESULTS];
-}
-
-+ (NSArray *)extractWindSpeedsforInfo:(NSDictionary *)info { //Returns wind speeds for forecast as NSNumbers
-    return [info valueForKeyPath:WIND_RESULTS];
-}
-
-+ (NSArray *)extractWeatherDescriptionsForInfo:(NSDictionary *)info { //Returns weather descriptinos for forecast as Strings
-    NSArray *descriptions = [info valueForKeyPath:WEATHER_RESULTS];
-    NSMutableArray *newDescriptions = [[NSMutableArray alloc] init];
-    if (descriptions) {
-        newDescriptions = [[NSMutableArray alloc] init];
-        for (id object in descriptions) {
-            if ([object isKindOfClass:[NSArray class]]) {
-                NSArray *array = (NSArray *)object;
-                NSString *description = array[0];
-                [newDescriptions addObject:[NSString stringWithFormat:@"%@", description]];
-            }
+//Returns correct keyPath to get city info
++ (NSString *)keyPathWithKey:(NSString *)key forType:(NSString *)type {
+    if (![type isEqualToString:CURRENT_WEATHER_KEY]) {
+        if ([[WeatherHelper cityArray] containsObject:key]) {
+            return [NSString stringWithFormat:@"city.%@", key];
         }
     }
-    return newDescriptions;
+    return key;
 }
-
-
 
 @end

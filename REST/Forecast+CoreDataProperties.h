@@ -2,7 +2,7 @@
 //  Forecast+CoreDataProperties.h
 //  REST
 //
-//  Created by Braden Gray on 10/9/16.
+//  Created by Braden Gray on 10/22/16.
 //  Copyright © 2016 Graycode. All rights reserved.
 //
 
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSDate *posted;
 @property (nullable, nonatomic, retain) City *city;
 @property (nullable, nonatomic, retain) NSSet<Day *> *days;
+@property (nullable, nonatomic, retain) Weather *currentWeather;
 
 @end
 

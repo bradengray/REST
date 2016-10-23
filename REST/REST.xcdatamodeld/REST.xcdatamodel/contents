@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16B2338c" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16B2548a" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="City" representedClassName="City" syncable="YES">
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="forecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Forecast" inverseName="city" inverseEntity="Forecast" syncable="YES"/>
     </entity>
     <entity name="Day" representedClassName="Day" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="dailyWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="day" inverseEntity="Weather" syncable="YES"/>
         <relationship name="forecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Forecast" inverseName="days" inverseEntity="Forecast" syncable="YES"/>
         <relationship name="hours" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hour" inverseName="day" inverseEntity="Hour" syncable="YES"/>
     </entity>
     <entity name="Forecast" representedClassName="Forecast" syncable="YES">
         <attribute name="posted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="forecast" inverseEntity="City" syncable="YES"/>
+        <relationship name="currentWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="forecast" inverseEntity="Weather" syncable="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="forecast" inverseEntity="Day" syncable="YES"/>
     </entity>
     <entity name="Hour" representedClassName="Hour" syncable="YES">
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="hours" inverseEntity="Day" syncable="YES"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="hour" inverseEntity="Weather" syncable="YES"/>
+        <relationship name="hourlyWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="hour" inverseEntity="Weather" syncable="YES"/>
     </entity>
     <entity name="Weather" representedClassName="Weather" syncable="YES">
+        <attribute name="currentTemp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="highTemp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="iconID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconThumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="lowTemp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sunrise" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sunset" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="weatherDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="hour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hour" inverseName="weather" inverseEntity="Hour" syncable="YES"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyWeather" inverseEntity="Day" syncable="YES"/>
+        <relationship name="forecast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Forecast" inverseName="currentWeather" inverseEntity="Forecast" syncable="YES"/>
+        <relationship name="hour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hour" inverseName="hourlyWeather" inverseEntity="Hour" syncable="YES"/>
     </entity>
     <elements>
-        <element name="City" positionX="-288" positionY="-13" width="128" height="133"/>
-        <element name="Day" positionX="7" positionY="11" width="128" height="88"/>
-        <element name="Forecast" positionX="-146" positionY="-81" width="128" height="88"/>
-        <element name="Hour" positionX="169" positionY="47" width="128" height="90"/>
-        <element name="Weather" positionX="223" positionY="164" width="128" height="120"/>
+        <element name="City" positionX="-369" positionY="-13" width="128" height="133"/>
+        <element name="Day" positionX="43" positionY="11" width="128" height="103"/>
+        <element name="Forecast" positionX="-144" positionY="-0" width="128" height="103"/>
+        <element name="Hour" positionX="250" positionY="27" width="128" height="88"/>
+        <element name="Weather" positionX="52" positionY="180" width="128" height="238"/>
     </elements>
 </model>

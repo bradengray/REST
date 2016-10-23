@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2548a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="3wm-ss-DgI" customClass="CWSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="148"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbP-bv-rNX">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, October 25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mm-fl-uef">
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="y88-ha-Dpa">
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7K6-FT-FcH">
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear Skies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSq-eJ-MbS">
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8H-Sp-0tG">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="QKd-w1-L4p"/>
+                                                <constraint firstAttribute="height" constant="50" id="Ypn-wZ-YYE"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="J8H-Sp-0tG" firstAttribute="centerY" secondItem="xSq-eJ-MbS" secondAttribute="centerY" id="Ekg-A6-ncO"/>
+                                    </constraints>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="p7H-d7-tRY">
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75/75" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upo-34-sWa">
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tE3-d3-phN">
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                            <state key="normal" title="Hours ▶︎">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" title="Hours ▼"/>
+                                            <connections>
+                                                <action selector="toggleOpen:" destination="3wm-ss-DgI" eventType="touchUpInside" id="NV9-8b-MB8"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tE3-d3-phN" firstAttribute="centerY" secondItem="Upo-34-sWa" secondAttribute="centerY" id="CFi-dG-3Fg"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="7K6-FT-FcH" firstAttribute="width" secondItem="y88-ha-Dpa" secondAttribute="width" id="6AF-cf-0PJ"/>
+                                <constraint firstItem="p7H-d7-tRY" firstAttribute="width" secondItem="y88-ha-Dpa" secondAttribute="width" id="AVU-pV-1ei"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="y88-ha-Dpa" secondAttribute="bottom" constant="8" id="2en-8l-gGW"/>
+                        <constraint firstItem="3mm-fl-uef" firstAttribute="top" secondItem="kbP-bv-rNX" secondAttribute="top" constant="8" id="2wa-vx-iqm"/>
+                        <constraint firstItem="3mm-fl-uef" firstAttribute="leading" secondItem="kbP-bv-rNX" secondAttribute="leading" constant="8" id="B0K-qS-WUs"/>
+                        <constraint firstAttribute="trailing" secondItem="y88-ha-Dpa" secondAttribute="trailing" constant="8" id="UEj-h7-Qvp"/>
+                        <constraint firstItem="y88-ha-Dpa" firstAttribute="top" secondItem="3mm-fl-uef" secondAttribute="bottom" constant="8" id="Vb0-Bb-jHA"/>
+                        <constraint firstItem="y88-ha-Dpa" firstAttribute="leading" secondItem="kbP-bv-rNX" secondAttribute="leading" constant="8" id="d8b-Zz-qGz"/>
+                        <constraint firstAttribute="trailing" secondItem="3mm-fl-uef" secondAttribute="trailing" constant="8" id="gOh-GT-eTz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="leading" secondItem="3wm-ss-DgI" secondAttribute="leading" id="6Ns-wd-9a8"/>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="top" secondItem="3wm-ss-DgI" secondAttribute="topMargin" id="hIB-ZR-jzB"/>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="bottom" secondItem="3wm-ss-DgI" secondAttribute="bottomMargin" id="o1w-ks-zPW"/>
+                <constraint firstAttribute="trailing" secondItem="kbP-bv-rNX" secondAttribute="trailing" id="vBz-kF-b8g"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dateLabel" destination="3mm-fl-uef" id="Ed7-ZS-36v"/>
+                <outlet property="disclosureButton" destination="tE3-d3-phN" id="NCG-v6-mhd"/>
+                <outlet property="highLowTempLabel" destination="Upo-34-sWa" id="9s7-re-Pfq"/>
+                <outlet property="weatherDescriptionLabel" destination="xSq-eJ-MbS" id="Zmx-Og-vfa"/>
+                <outlet property="weatherIconImageView" destination="J8H-Sp-0tG" id="mY9-r1-pxU"/>
+            </connections>
+            <point key="canvasLocation" x="65" y="-194.5"/>
+        </view>
+    </objects>
+</document>

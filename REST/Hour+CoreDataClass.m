@@ -9,7 +9,7 @@
 #import "Hour+CoreDataClass.h"
 #import "Day+CoreDataClass.h"
 #import "Weather+CoreDataClass.h"
-#import "WeatherHelper+Formats.h"
+#import "ForecastWeatherHelper+Formats.h"
 
 @implementation Hour
 
@@ -17,7 +17,8 @@
 + (NSSet *)hoursForDay:(Day *)day withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context {
     
     NSError *error;
-    NSArray *dates = [WeatherHelper extractHoursForDay:day.date withInfo:info];
+    NSLog(@"%@", day.date);
+    NSArray *dates = [ForecastWeatherHelper extractHoursForDay:day.date withInfo:info];
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
     request.predicate = [NSPredicate predicateWithFormat:@"day == %@", day];
@@ -36,12 +37,12 @@
                 if (![storedHours containsObject:time]) {
                     Hour *hour = [NSEntityDescription insertNewObjectForEntityForName:@"Hour" inManagedObjectContext:context];
                     hour.time = time;
-                    hour.weather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
+                    hour.hourlyWeather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
                     [hours addObject:hour];
                 } else {
                     //Update hours that do exist
                     Hour *hour = [results objectAtIndex:[storedHours indexOfObject:time]];
-                    hour.weather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
+                    hour.hourlyWeather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
                 }
             }
             return hours;
@@ -50,7 +51,7 @@
             for (NSDate *time in dates) {
                 Hour *hour = [NSEntityDescription insertNewObjectForEntityForName:@"Hour" inManagedObjectContext:context];
                 hour.time = time;
-                hour.weather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
+                hour.hourlyWeather = [Weather weatherForHour:hour withWeatherInfo:info inNSManagedObjectContext:context];
                 [hours addObject:hour];
             }
             return hours;
@@ -63,7 +64,7 @@
 }
 
 + (void)deleteHour:(Hour *)hour {
-    [hour.managedObjectContext deleteObject:hour.weather];
+    [hour.managedObjectContext deleteObject:hour.hourlyWeather];
     [hour.managedObjectContext deleteObject:hour];
 }
 

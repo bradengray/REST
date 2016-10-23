@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class City, Day;
+@class City, Day, Weather;
 
 NS_ASSUME_NONNULL_BEGIN
 

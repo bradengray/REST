@@ -2,7 +2,7 @@
 //  Hour+CoreDataProperties.h
 //  REST
 //
-//  Created by Braden Gray on 10/9/16.
+//  Created by Braden Gray on 10/22/16.
 //  Copyright © 2016 Graycode. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, copy) NSDate *time;
 @property (nullable, nonatomic, retain) Day *day;
-@property (nullable, nonatomic, retain) Weather *weather;
+@property (nullable, nonatomic, retain) Weather *hourlyWeather;
 
 @end
 

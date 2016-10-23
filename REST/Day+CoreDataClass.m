@@ -9,7 +9,9 @@
 #import "Day+CoreDataClass.h"
 #import "Forecast+CoreDataClass.h"
 #import "Hour+CoreDataClass.h"
-#import "WeatherHelper+Formats.h"
+#import "Weather+CoreDataClass.h"
+#import "DailyWeatherHelper+Formats.h"
+#import "ForecastWeatherHelper+Formats.h"
 
 @implementation Day
 
@@ -17,29 +19,58 @@
 + (NSSet *)daysForForecast:(Forecast *)forecast withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context {
     //Find days for forecast any days too old were deleted in forecast
     NSError *error;
-    NSArray *dates = [WeatherHelper extractForecastDaysAsNSDatesForInfo:info];
+    NSArray *dates = [DailyWeatherHelper extractDailyDatesAsNSDatesForInfo:info];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Day"];
     request.predicate = [NSPredicate predicateWithFormat:@"forecast == %@", forecast];
     
-    NSMutableArray *results = [[context executeFetchRequest:request error:&error] mutableCopy];
+    NSArray *results = [[context executeFetchRequest:request error:&error] mutableCopy];
     if (!error) {
         NSMutableSet *newDays = [[NSMutableSet alloc] init];
         if ([results count] > 0) {
-            //Update any days that already exist
-            for (NSDate *date in dates) {
-                int count = 0;
-                for (Day *day in results) {
-                    if (![self isSameDayWithDate1:date date2:day.date]) {
-                        if (![self isSameDayWithDate1:[NSDate date] date2:day.date]) {
-                            if ([day.date timeIntervalSinceNow] < 0) {
-                                for (Hour *hour in day.hours) {
-                                    [Hour deleteHour:hour];
-                                }
-                                [context deleteObject:day];
+            if ([[info valueForKey:DATA_TYPE] isEqualToString:DAILY_WEATHER_KEY]) {
+                NSArray *dates = [DailyWeatherHelper extractDailyDatesAsNSDatesForInfo:info];
+                NSMutableSet *newDays = [[NSMutableSet alloc] init];
+                if ([results count] > 0) {
+                    //Iterate over days
+                    for (Day *day in results) {
+                        //If day is older than today delete it
+                        if ([day.date timeIntervalSinceNow] < 0) {
+                            for (Hour *hour in day.hours) {
+                                [Hour deleteHour:hour];
                             }
+                            [context deleteObject:day.dailyWeather];
+                            [context deleteObject:day];
+                        } else {
+                            //If day is not then update it
+                            day.dailyWeather = [Weather weatherForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
                         }
-                        count++;
-                    } else {
+                    }
+                    for (NSDate *date in dates) {
+                        if (![results containsObject:date]) {
+                            Day *day = [NSEntityDescription insertNewObjectForEntityForName:@"Day" inManagedObjectContext:context];
+                            day.date = date;
+                            day.dailyWeather = [Weather weatherForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
+                            [newDays addObject:day];
+                        }
+                    }
+                    return newDays;
+                } else {
+                    //Create new Day object
+                    for (NSDate *date in dates) {
+                        Day *day = [NSEntityDescription insertNewObjectForEntityForName:@"Day" inManagedObjectContext:context];
+                        day.date = date;
+                        NSSet *hours = [Hour hoursForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
+                        if (hours) {
+                            [day addHours:hours];
+                        }
+                        [newDays addObject:day];
+                    }
+                    return newDays;
+                }
+            } else if ([[info valueForKey:DATA_TYPE] isEqualToString:FORECAST_WEATHER_KEY]) {
+                if ([results count] > 0) {
+                    //Iterate over days
+                    for (Day *day in results) {
                         //Delete old hours
                         [Hour deleteHoursForDay:day olderThanNowInNSManagedContext:context];
                         //Add new hours
@@ -47,27 +78,13 @@
                         [day addHours:hours];
                     }
                 }
-                //Create new object if day does not yet exist
-                if ([results count] == count) {
-                    Day *day = [NSEntityDescription insertNewObjectForEntityForName:@"Day" inManagedObjectContext:context];
-                    day.date = date;
-                    NSSet *hours = [Hour hoursForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
-                    if (hours) {
-                        [day addHours:hours];
-                    }
-                    [newDays addObject:day];
-                }
             }
-            return newDays;
         } else {
             //Create new Day object
             for (NSDate *date in dates) {
                 Day *day = [NSEntityDescription insertNewObjectForEntityForName:@"Day" inManagedObjectContext:context];
                 day.date = date;
-                NSSet *hours = [Hour hoursForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
-                if (hours) {
-                    [day addHours:hours];
-                }
+                day.dailyWeather = [Weather weatherForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
                 [newDays addObject:day];
             }
             return newDays;
@@ -80,7 +97,7 @@
 }
 
 //Checks to see if dates occur on the say day
-+ (BOOL)isSameDayWithDate1:(NSDate*)date1 date2:(NSDate*)date2 {
++ (BOOL)date:(NSDate *)date1 isSameDayWithDate2:(NSDate*)date2 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
     unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;

@@ -24,6 +24,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Would you like this app to use your location</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Would you like this app to use your location</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -48,6 +52,15 @@
         <key>NSExceptionDomains</key>
         <dict>
             <key>api.openweathermap.org</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.1</string>
+            </dict>
+            <key>openweathermap.org</key>
             <dict>
                 <key>NSIncludesSubdomains</key>
                 <true/>

@@ -2,7 +2,7 @@
 //  Day+CoreDataProperties.m
 //  REST
 //
-//  Created by Braden Gray on 10/9/16.
+//  Created by Braden Gray on 10/22/16.
 //  Copyright © 2016 Graycode. All rights reserved.
 //
 
@@ -15,7 +15,8 @@
 }
 
 @dynamic date;
-@dynamic hours;
 @dynamic forecast;
+@dynamic hours;
+@dynamic dailyWeather;
 
 @end
