@@ -13,6 +13,7 @@
 #define CURRENT_TEMP_KEYPATH @"main.temp"
 #define HIGH_TEMP_KEYPATH @"main.temp_max"
 #define LOW_TEMP_KEYPATH @"main.temp_min"
+#define WIND_SPEED_KEYPATH @"wind.speed"
 #define DESCRIPTION_KEYPATH @"weather.description"
 #define WEATHER_ICON_KEYPATH @"weather.icon"
 #define SUNRISE_KEY @"sys.sunrise"
@@ -44,6 +45,13 @@
 + (NSNumber *)extractCurrentWeatherLowTempForInfo:(NSDictionary *)info { //Return low temp in farenheit for forecast as NSNumber
     if ([[info valueForKey:DATA_TYPE] isEqualToString:CURRENT_WEATHER_KEY]) {
         return [info valueForKeyPath:LOW_TEMP_KEYPATH];
+    }
+    return nil;
+}
+
++ (NSNumber *)extractCurrentWeatherWindSpeedForInfo:(NSDictionary *)info { //Returns wind speed in mph
+    if ([[info valueForKey: DATA_TYPE] isEqualToString:CURRENT_WEATHER_KEY]) {
+        return [info valueForKey:WIND_SPEED_KEYPATH];
     }
     return nil;
 }

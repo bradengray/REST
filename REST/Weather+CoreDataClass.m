@@ -45,6 +45,7 @@
         weather.highTemp = [[CurrentWeatherHelper extractCurrentWeatherhighTempForInfo:info] doubleValue];
         weather.lowTemp = [[CurrentWeatherHelper extractCurrentWeatherLowTempForInfo:info] doubleValue];
         weather.weatherDescription = [CurrentWeatherHelper extractCurrentWeatherDescriptionForInfo:info];
+        weather.windSpeed = [[CurrentWeatherHelper extractCurrentWeatherWindSpeedForInfo:info] doubleValue];
         weather.iconID = [CurrentWeatherHelper extractCurrentWeatherIconForInfo:info];
         weather.iconThumbnail = nil;
         return weather;

@@ -79,7 +79,8 @@
         if ([results count]) {
             NSMutableSet *oldhours = [[NSMutableSet alloc] init];
             for (Hour *hour in results) {
-                if ([hour.time timeIntervalSinceNow] < 0) {
+                NSLog(@"%f", [hour.time timeIntervalSinceNow]);
+                if ([hour.time timeIntervalSinceNow] + (180 * 3) < 0) {
                     [oldhours addObject:hour];
                 }
             }

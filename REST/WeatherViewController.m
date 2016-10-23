@@ -7,6 +7,8 @@
 //
 
 #import "WeatherViewController.h"
+#import "Hour+CoreDataClass.h"
+#import "Day+CoreDataClass.h"
 
 @interface WeatherViewController ()
 
@@ -68,15 +70,31 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if ([[self.fetchedResultsController sections] count] > 0) {
-//        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        Hour *hour = (Hour *)[sectionInfo objects][0];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateFormat:@"EEEE, MMM d, h:mm a"];
+        NSString *time = [formatter stringFromDate:hour.day.date];
+        return time;
 //        return [sectionInfo name];
-//    } else
+    } else
         return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell2"];
+    NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // Configure the cell with data from the managed object.
+     Hour *hour = (Hour *)managedObject;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateFormat:@"EEEE, MMM d, h:mm a"];
+    NSString *time = [formatter stringFromDate:hour.time];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", time];
+    return cell;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {

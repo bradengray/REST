@@ -26,7 +26,7 @@
 //Returns url for daily weather for city name
 + (NSURL *)urlForDailyWeatherForCityID:(NSString *)cityID {
     cityID = [cityID stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return [self urlForQuery:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?id=%@&cnt=5", cityID]];
+    return [self urlForQuery:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?id=%@&cnt=6", cityID]];
 }
 
 

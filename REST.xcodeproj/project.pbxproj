@@ -233,8 +233,6 @@
 		F22A3D081D9E0B5C0024376F /* REST */ = {
 			isa = PBXGroup;
 			children = (
-				F269F8541DB816A0009840AC /* WeatherViewController.h */,
-				F269F8551DB816A0009840AC /* WeatherViewController.m */,
 				F272281C1DBC4A8600B183CD /* Model */,
 				F22A3D531DA13EB50024376F /* View */,
 				F22A3D521DA13E840024376F /* ViewControllers */,
@@ -280,6 +278,8 @@
 		F22A3D521DA13E840024376F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F269F8541DB816A0009840AC /* WeatherViewController.h */,
+				F269F8551DB816A0009840AC /* WeatherViewController.m */,
 				F2B823BD1DB03EB0004F6768 /* CurrentWeatherViewController.h */,
 				F2B823BE1DB03EB0004F6768 /* CurrentWeatherViewController.m */,
 				F269F84E1DB6C957009840AC /* CWSectionHeaderView.h */,

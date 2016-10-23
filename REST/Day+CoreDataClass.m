@@ -59,11 +59,6 @@
                     for (NSDate *date in dates) {
                         Day *day = [NSEntityDescription insertNewObjectForEntityForName:@"Day" inManagedObjectContext:context];
                         day.date = date;
-                        NSSet *hours = [Hour hoursForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
-                        if (hours) {
-                            [day addHours:hours];
-                        }
-                        [newDays addObject:day];
                     }
                     return newDays;
                 }
@@ -75,7 +70,15 @@
                         [Hour deleteHoursForDay:day olderThanNowInNSManagedContext:context];
                         //Add new hours
                         NSSet *hours = [Hour hoursForDay:day withWeatherInfo:info inNSManagedObjectContext:context];
-                        [day addHours:hours];
+                        if (![hours count]) {
+                            for (Hour *hour in day.hours) {
+                                [Hour deleteHour:hour];
+                            }
+                            [context deleteObject:day.dailyWeather];
+                            [context deleteObject:day];
+                        } else {
+                            [day addHours:hours];
+                        }
                     }
                 }
             }
@@ -96,17 +99,17 @@
     return nil;
 }
 
-//Checks to see if dates occur on the say day
-+ (BOOL)date:(NSDate *)date1 isSameDayWithDate2:(NSDate*)date2 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
-    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
-    
-    return [comp1 day]   == [comp2 day] &&
-    [comp1 month] == [comp2 month] &&
-    [comp1 year]  == [comp2 year];
-}
+////Checks to see if dates occur on the say day
+//+ (BOOL)date:(NSDate *)date1 isSameDayWithDate2:(NSDate*)date2 {
+//    NSCalendar* calendar = [NSCalendar currentCalendar];
+//    
+//    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+//    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
+//    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+//    
+//    return [comp1 day]   == [comp2 day] &&
+//    [comp1 month] == [comp2 month] &&
+//    [comp1 year]  == [comp2 year];
+//}
 
 @end

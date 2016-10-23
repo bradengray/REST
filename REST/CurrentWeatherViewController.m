@@ -33,12 +33,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentCityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempatureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weatherDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *TempHighLowLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tempHighLowLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunriseSunsetLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property (weak, nonatomic) IBOutlet UILabel *forecastLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -51,7 +52,6 @@
 @property (nonatomic) NSInteger openSectionIndex;
 
 @property (nonatomic, strong) NSArray *sectionsInfo;
-//@property (nonatomic) NSInteger sectionsCount;
 
 @end
 
@@ -66,12 +66,15 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     //Set up backGroundImage
     UIImage *background;
     if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
-        background = [UIImage imageNamed:@"nashLandscape"];
+        background = [UIImage imageNamed:@"Day_Mount_Land"];
     } else {
-        background = [UIImage imageNamed:@"nashville"];
+        background = [UIImage imageNamed:@"Day_Mount_Port"];
     }
     [self.imageView setImage:background];
     [self.blurredImageView setImageToBlur:background blurRadius:10 completionBlock:nil];
+    
+    //Give CityLabel BorderedText
+    self.cityLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:self.cityLabel.text];
     
     //Register Nib for SectionHeaders
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
@@ -104,9 +107,9 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIImage *background;
         if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
-            background = [UIImage imageNamed:@"nashLandscape"];
+            background = [UIImage imageNamed:@"Day_Mount_Land"];
         } else {
-            background = [UIImage imageNamed:@"nashville"];
+            background = [UIImage imageNamed:@"Day_Mount_Port"];
         }
         [self.imageView setImage:background];
         [self.blurredImageView setImageToBlur:background blurRadius:10 completionBlock:nil];
@@ -191,7 +194,6 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 - (void)setMyLocation:(CLLocation *)myLocation {
     _myLocation = myLocation;
     [self fetchCurrentWeatherForLatitude:myLocation.coordinate.latitude andLongitude:myLocation.coordinate.longitude];
-//    [self searchDataBaseForWeatherForLatitude:myLocation.coordinate.latitude andLongitude:myLocation.coordinate.longitude];
 }
 
 #pragma mark - CLLocationManagerDelegate Methods
@@ -253,28 +255,6 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
         [self fetchCurrentWeatherForCity:city];
     }
 }
-
-//- (void)searchDataBaseForWeatherForLatitude:(double)lat andLongitude:(double)lon {
-//    NSError *error;
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"City"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"latitude == %f AND longitude == %f", lat, lon];
-//    
-//    NSArray *results = [self.context executeFetchRequest:request error:&error];
-//    if (!error) {
-//        if ([results count] == 1) {
-//            City *city = [results firstObject];
-//            self.city = city;
-//            [self updateCurrentWeather];
-//            [self.tableView reloadData];
-//        } else {
-//            [self fetchCurrentWeatherForLatitude:lat andLongitude:lon];
-//        }
-//    } else {
-//        //Ignore for now and log error;
-//        NSLog(@"Error:%@", error.localizedDescription);
-//        [self fetchCurrentWeatherForLatitude:lat andLongitude:lon];
-//    }
-//}
 
 #pragma mark - Fetch
 
@@ -345,7 +325,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 //- (void)fetchForecast {
 //    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
 //    request.predicate = [NSPredicate predicateWithFormat:@"day IN %@", self.city.forecast.days];
-//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"day.date" ascending:NO selector:@selector(compare:)], [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
+//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"day.date" ascending:YES selector:@selector(compare:)], [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES selector:@selector(compare:)]];
 //    
 //    self.fetchedResultsController = nil;
 //    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:@"day" cacheName:nil];
@@ -396,23 +376,31 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     });
 }
 
+#pragma mark - UI
+
+- (NSAttributedString *)attribStringWithDarkGrayStrokeForString:(NSString *)string {
+    return [[NSAttributedString alloc] initWithString:string attributes:@{NSStrokeWidthAttributeName : @-2, NSStrokeColorAttributeName : [UIColor darkGrayColor]}];
+}
+
 //Update current weather for UI
 - (void)updateCurrentWeather {
     if (self.city.name) {
-        self.currentCityLabel.text = [NSString stringWithFormat:@"Current Weather For %@", self.city.name];
+        self.currentCityLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:[NSString stringWithFormat:@"Current Weather For %@", self.city.name]];
         self.cityTextField.text = self.city.name;
         Weather *weather = self.city.forecast.currentWeather;
-        self.TempHighLowLabel.text = [NSString stringWithFormat:@"%.0f°/%.0f°", weather.highTemp, weather.lowTemp];
-        self.tempatureLabel.text = [NSString stringWithFormat:@"%.0f°", weather.currentTemp];
-        self.weatherDescriptionLabel.text = weather.weatherDescription;
+        self.tempHighLowLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:[NSString stringWithFormat:@"Hi %.0f°/ Lo %.0f°", weather.highTemp, weather.lowTemp]];
+        self.tempatureLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:[NSString stringWithFormat:@"%.0f°", weather.currentTemp]];
+        self.weatherDescriptionLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:weather.weatherDescription];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setLocale:[NSLocale currentLocale]];
         [formatter setDateFormat:@"h:mm a"];
+        NSDate *sunTime;
         if ([[NSDate date] timeIntervalSinceDate:weather.sunrise] > 0) {
-            self.sunriseSunsetLabel.text = [NSString stringWithFormat:@"Sunset %@", [formatter stringFromDate:weather.sunset]];
+            sunTime = weather.sunset;
         } else {
-            self.sunriseSunsetLabel.text = [NSString stringWithFormat:@"Sunrise %@", [formatter stringFromDate:weather.sunrise]];
+            sunTime = weather.sunrise;
         }
+        self.sunriseSunsetLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:[NSString stringWithFormat:@"Sunset %@", [formatter stringFromDate:sunTime]]];
         self.weatherIcon.image = [UIImage imageWithData:weather.iconThumbnail];
         if (!self.weatherIcon.image) {
             [self fetchAndSetWeatherIconForImageView:self.weatherIcon withWeatherObject:weather];
@@ -484,7 +472,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 //Returns number of sections in tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([self.sectionsInfo count]) {
-        self.forecastLabel.text = FORECAST_LABEL_TEXT;
+        self.forecastLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:FORECAST_LABEL_TEXT];
     }
     return [self.sectionsInfo count];;
 }
@@ -512,7 +500,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     cell.timeLabel.text = time;
     cell.tempLabel.text = [NSString stringWithFormat:@"Temp %.0f°", hour.hourlyWeather.currentTemp];
     cell.weatherDetailLabel.text = hour.hourlyWeather.weatherDescription;
-    cell.windLabel.text = [NSString stringWithFormat:@"Wind %.0f%%", hour.hourlyWeather.windSpeed];
+    cell.windLabel.text = [NSString stringWithFormat:@"Wind %.0f mph", hour.hourlyWeather.windSpeed];
     cell.weatherIconImageView.image = [UIImage imageWithData:hour.hourlyWeather.iconThumbnail];
     if (!cell.weatherIconImageView.image) {
         [self fetchAndSetWeatherIconForImageView:cell.weatherIconImageView withWeatherObject:hour.hourlyWeather];
@@ -529,7 +517,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 //        Hour *hour = (Hour *)managedObject;
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //        [formatter setLocale:[NSLocale currentLocale]];
-//        [formatter setDateFormat:@"h:mm a"];
+//        [formatter setDateFormat:@"EEEE, MMM d, h:mm a"];
 //        NSString *time = [formatter stringFromDate:hour.time];
 //        cell.timeLabel.text = time;
 //        cell.tempLabel.text = [NSString stringWithFormat:@"%.0f°", hour.hourlyWeather.currentTemp];
@@ -547,8 +535,6 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 
 //Creates view for header in section
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-//    Hour *hour = [[sectionInfo objects] objectAtIndex:0];
 //    Hour *hour = (Hour *)[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
 //    Day *day = hour.day;
     Section *mySection = self.sectionsInfo[section];
