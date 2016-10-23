@@ -82,10 +82,10 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="kbP-bv-rNX" firstAttribute="leading" secondItem="3wm-ss-DgI" secondAttribute="leading" id="6Ns-wd-9a8"/>
-                <constraint firstItem="kbP-bv-rNX" firstAttribute="top" secondItem="3wm-ss-DgI" secondAttribute="topMargin" id="hIB-ZR-jzB"/>
-                <constraint firstItem="kbP-bv-rNX" firstAttribute="bottom" secondItem="3wm-ss-DgI" secondAttribute="bottomMargin" id="o1w-ks-zPW"/>
-                <constraint firstAttribute="trailing" secondItem="kbP-bv-rNX" secondAttribute="trailing" id="vBz-kF-b8g"/>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="leading" secondItem="3wm-ss-DgI" secondAttribute="leading" priority="750" id="6Ns-wd-9a8"/>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="top" secondItem="3wm-ss-DgI" secondAttribute="topMargin" priority="750" id="hIB-ZR-jzB"/>
+                <constraint firstItem="kbP-bv-rNX" firstAttribute="bottom" secondItem="3wm-ss-DgI" secondAttribute="bottomMargin" priority="750" id="o1w-ks-zPW"/>
+                <constraint firstAttribute="trailing" secondItem="kbP-bv-rNX" secondAttribute="trailing" priority="750" id="vBz-kF-b8g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
