@@ -119,21 +119,15 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
         for (Section *section in self.sectionsInfo) {
             section.open = NO;
         }
+        self.openSectionIndex = NSNotFound;
     } else {
         //Create sections info
-        if (![self.sectionsInfo count]) {
-            NSMutableArray *newSections = [[NSMutableArray alloc] init];
-            for (int i = 0; i < 5; i ++) {
-                Section *section = [[Section alloc] init];
-                [newSections addObject:section];
-            }
-            self.sectionsInfo = newSections;
-        } else {
-            //Close all sections
-            for (Section *section in self.sectionsInfo) {
-                section.open = NO;
-            }
+        NSMutableArray *newSections = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 5; i ++) {
+            Section *section = [[Section alloc] init];
+            [newSections addObject:section];
         }
+        self.sectionsInfo = newSections;
     }
 }
 
@@ -552,6 +546,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     headerView.section = section;
     headerView.delegate = self;
     mySection.headerView = headerView;
+    headerView.disclosureButton.selected = mySection.open;
     
     Day *day = [self dayForSection:section];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
