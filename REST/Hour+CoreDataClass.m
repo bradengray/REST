@@ -17,7 +17,6 @@
 + (NSSet *)hoursForDay:(Day *)day withWeatherInfo:(NSDictionary *)info inNSManagedObjectContext:(NSManagedObjectContext *)context {
     
     NSError *error;
-    NSLog(@"%@", day.date);
     NSArray *dates = [ForecastWeatherHelper extractHoursForDay:day.date withInfo:info];
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hour"];
@@ -79,7 +78,6 @@
         if ([results count]) {
             NSMutableSet *oldhours = [[NSMutableSet alloc] init];
             for (Hour *hour in results) {
-                NSLog(@"%f", [hour.time timeIntervalSinceNow]);
                 if ([hour.time timeIntervalSinceNow] + (180 * 3) < 0) {
                     [oldhours addObject:hour];
                 }

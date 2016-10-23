@@ -63,15 +63,6 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //Set up backGroundImage
-    UIImage *background;
-    if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
-        background = [UIImage imageNamed:@"Day_Mount_Land"];
-    } else {
-        background = [UIImage imageNamed:@"Day_Mount_Port"];
-    }
-    [self.imageView setImage:background];
-    [self.blurredImageView setImageToBlur:background blurRadius:10 completionBlock:nil];
     
     //Give CityLabel BorderedText
     self.cityLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:self.cityLabel.text];
@@ -105,14 +96,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIImage *background;
-        if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
-            background = [UIImage imageNamed:@"Day_Mount_Land"];
-        } else {
-            background = [UIImage imageNamed:@"Day_Mount_Port"];
-        }
-        [self.imageView setImage:background];
-        [self.blurredImageView setImageToBlur:background blurRadius:10 completionBlock:nil];
+        [self setBackgroundImage];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         //Nothing to do
     }];
@@ -378,6 +362,30 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 
 #pragma mark - UI
 
+- (void)setBackgroundImage {
+    UIImage *background = [self imageForTimeAndOrientation];
+    [self.imageView setImage:background];
+    [self.blurredImageView setImageToBlur:background blurRadius:10 completionBlock:nil];
+}
+
+- (UIImage *)imageForTimeAndOrientation {
+    if (self.city.name) {
+        NSDate *now = [NSDate date];
+        if ([now timeIntervalSinceDate:self.city.forecast.currentWeather.sunset] > 0 || [now timeIntervalSinceDate:self.city.forecast.currentWeather.sunrise] < 0) {
+            if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
+                return [UIImage imageNamed:@"Night_Land"];
+            } else {
+                return [UIImage imageNamed:@"Night_Port"];
+            }
+        }
+    }
+    if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
+        return [UIImage imageNamed:@"Day_Mount_Land"];
+    } else {
+        return [UIImage imageNamed:@"Day_Mount_Port"];
+    }
+}
+
 - (NSAttributedString *)attribStringWithDarkGrayStrokeForString:(NSString *)string {
     return [[NSAttributedString alloc] initWithString:string attributes:@{NSStrokeWidthAttributeName : @-2, NSStrokeColorAttributeName : [UIColor darkGrayColor]}];
 }
@@ -385,6 +393,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 //Update current weather for UI
 - (void)updateCurrentWeather {
     if (self.city.name) {
+        [self setBackgroundImage];
         self.currentCityLabel.attributedText = [self attribStringWithDarkGrayStrokeForString:[NSString stringWithFormat:@"Current Weather For %@", self.city.name]];
         self.cityTextField.text = self.city.name;
         Weather *weather = self.city.forecast.currentWeather;
@@ -449,7 +458,8 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 
 //Search button touched. Dissmiss keyboard and start data fetch
 - (IBAction)searchButtonTouched:(UIButton *)sender {
-    [self searchDataBaseForWeatherForCity:self.cityTextField.text];
+//    [self searchDataBaseForWeatherForCity:self.cityTextField.text];
+    [self.cityTextField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -546,6 +556,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     Day *day = [self dayForSection:section];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale currentLocale]];
+//    [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setDateFormat:@"EEEE, MMM d"];
     NSString *string = [formatter stringFromDate:day.date];
     
