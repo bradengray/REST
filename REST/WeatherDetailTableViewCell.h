@@ -10,11 +10,10 @@
 
 @interface WeatherDetailTableViewCell : UITableViewCell
 
-//Sets texts for different labels in custom cells
-- (void)setTimeText:(NSString *)text;
-- (void)setTempText:(NSString *)text;
-- (void)setWindText:(NSString *)text;
-- (void)setHumidityText:(NSString *)text;
-- (void)setWeatherDetailText:(NSString *)text;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel; //Label designated for time
+@property (weak, nonatomic) IBOutlet UILabel *tempLabel; //Label designated for temp
+@property (weak, nonatomic) IBOutlet UILabel *windLabel; //Label designated for wind
+@property (weak, nonatomic) IBOutlet UILabel *weatherDetailLabel; //Label designated for weather
+@property (weak, nonatomic) IBOutlet UIImageView *weatherIconImageView; //Holds weather Icon
 
 @end

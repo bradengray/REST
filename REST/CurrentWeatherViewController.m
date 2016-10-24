@@ -363,16 +363,18 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
 }
 
 - (UIImage *)imageForTimeAndOrientation {
-    if (self.city.name) {
-        NSDate *now = [NSDate date];
-        if ([now timeIntervalSinceDate:self.city.forecast.currentWeather.sunset] > 0 || [now timeIntervalSinceDate:self.city.forecast.currentWeather.sunrise] < 0) {
-            if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
-                return [UIImage imageNamed:@"Night_Land"];
-            } else {
-                return [UIImage imageNamed:@"Night_Port"];
-            }
-        }
-    }
+//    if (self.city.name) {
+//        NSDate *now = [NSDate date];
+//        NSLog(@"ss:%f sr:%f", [now timeIntervalSinceDate:self.city.forecast.currentWeather.sunset], [now timeIntervalSinceDate:self.city.forecast.currentWeather.sunrise]);
+//        NSLog(@"sunset:%@ sunrise:%@", self.city.forecast.currentWeather.sunset, self.city.forecast.currentWeather.sunrise);
+//        if ([now timeIntervalSinceDate:self.city.forecast.currentWeather.sunset] > 0 || [now timeIntervalSinceDate:self.city.forecast.currentWeather.sunrise] < 0) {
+//            if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
+//                return [UIImage imageNamed:@"Night_Land"];
+//            } else {
+//                return [UIImage imageNamed:@"Night_Port"];
+//            }
+//        }
+//    }
     if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
         return [UIImage imageNamed:@"Day_Mount_Land"];
     } else {
@@ -556,7 +558,7 @@ static NSString *TableViewHeaderIdentifier = @"TableViewHeaderIndentifier";
     NSString *string = [formatter stringFromDate:day.date];
     
     headerView.dateLabel.text = string;
-    headerView.highLowTempLabel.text = [NSString stringWithFormat:@"%.0f°/%.0f°", day.dailyWeather.highTemp, day.dailyWeather.lowTemp];
+    headerView.highLowTempLabel.text = [NSString stringWithFormat:@"Hi %.0f°/ Lo %.0f°", day.dailyWeather.highTemp, day.dailyWeather.lowTemp];
     headerView.weatherDescriptionLabel.text = day.dailyWeather.weatherDescription;
     headerView.weatherIconImageView.image = [UIImage imageWithData:day.dailyWeather.iconThumbnail];
     if (!headerView.weatherIconImageView.image) {

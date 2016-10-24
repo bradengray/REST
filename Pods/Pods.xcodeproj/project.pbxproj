@@ -1,0 +1,831 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E5571ED7BD9BC0178B4BE124DA5B2CD /* UIImageView+LBBlurredImage.h in Headers */ = {isa = PBXBuildFile; fileRef = E8348898FC845530982CAC24A76F8435 /* UIImageView+LBBlurredImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E9AEC55AC1EBCA485AC989C23CC56C3 /* Pods-REST-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7FB42DF91C12B1731BFD1ED2419EB /* Pods-REST-dummy.m */; };
+		23F2986B78BBEE90E27DB3BF09FD5294 /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB88D0C49CF4A7340DE12385AA51DF /* TSBlurView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3B8F7D0206F2F9225135AF7F3763B140 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 818F753F2950CE5A55C3AF64AAE426C5 /* TSMessage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4DAE4CFA529CF3FF5D27773E81A54981 /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = FB26B79A6A13C140508E7628D2114593 /* HexColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DAE44733694A86D378C4AB9D03EF360 /* TSMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFE2D983905683BF7B124A75A704A1E /* TSMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F27D5C9FA93870917B0779A9D11557A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1316B56CDF36226D524463D712552A /* Foundation.framework */; };
+		615D57F2D5026472A990CBDA9BF1AB72 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FE79EE069EE39ECC2B04088AFB3BA /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6C1558C1B536F4165DD39E18445CD809 /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = B27639C2D056DF693D504221FB0807BA /* UIImage+ImageEffects.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		744D713C25916D3E27A80B6907757BC7 /* TSMessages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D345234272376D19FC1BADFC245D43B8 /* TSMessages-dummy.m */; };
+		8994E7853C0A72024779EE2DF8958F33 /* LBBlurredImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6A7838D65536A4CFCD2C1EFD89626 /* LBBlurredImage-dummy.m */; };
+		91975E1B778DF34852BFE3D6510F5F2E /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8028B9D7CAAD74FB37A67078CEC5CB /* UIImageView+LBBlurredImage.m */; };
+		924F9BF3AB03D2340E03869EF2076439 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D898948B574991CCEAA4A0A40E049C5 /* UIImage+ImageEffects.m */; };
+		9F85F550CAC3A6BF67DC12EDB35CAD8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1316B56CDF36226D524463D712552A /* Foundation.framework */; };
+		A387346229A52B5006794D577C3FE487 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF97B23FD5E1F0608BF956A521F64A /* TSMessageView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		AEDAFE224913A654083E3FDC16E298F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BD724888C7286F5812C96DC4ADE4FC /* CoreGraphics.framework */; };
+		B156B6156AD56216B48A15118520BC24 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C0074572713A719CA1E4A07B5F77616B /* HexColors-dummy.m */; };
+		C589C26237CBBD2F1AFFAD5275EFDDD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1316B56CDF36226D524463D712552A /* Foundation.framework */; };
+		C7163F3AAF6DAF5797736AA30745F0AF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F75AB6F0CFD9846BCD6DB21EA864992 /* Accelerate.framework */; };
+		CA63C07652DF51065C9ADBFD0D1B0150 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1316B56CDF36226D524463D712552A /* Foundation.framework */; };
+		CF74DEF83AF61AD74A1EBF728948C6DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E9DE23470276E5BD7696D06881E026 /* UIKit.framework */; };
+		D2930C8E441D790975DA99ADE5DCBD4B /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7912426A65297B5BF18813E86BA2FF /* TSBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF359E4C20F2E270021628591F32F142 /* TSMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2AFADC10F6BDA88452CA9AD39C8663 /* TSMessageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5DE70A4614764335998BA620E1463852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 785E456A4B5EC8A508CE868E04789C03;
+			remoteInfo = LBBlurredImage;
+		};
+		6464854D341119061BB5C6C8E311724C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9EF397B95762DDB254C71DDCB4B1381;
+			remoteInfo = HexColors;
+		};
+		91FDD85169BB1A7239A85F4F5B5AE709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9EF397B95762DDB254C71DDCB4B1381;
+			remoteInfo = HexColors;
+		};
+		9BACFE1CEE4CC0C135CDE98E4C431B12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B137CE00C5AA2C69DDCFA81AF810C16;
+			remoteInfo = TSMessages;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05E9DE23470276E5BD7696D06881E026 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		07EB88D0C49CF4A7340DE12385AA51DF /* TSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSBlurView.m; path = Pod/Classes/TSBlurView.m; sourceTree = "<group>"; };
+		0D898948B574991CCEAA4A0A40E049C5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "LBBlurredImage/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		1749DE2AC24C77B605F8E11F18433AE1 /* Pods-REST.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-REST.release.xcconfig"; sourceTree = "<group>"; };
+		1E3FE79EE069EE39ECC2B04088AFB3BA /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
+		225EE690A66B98EA1FA5E32247788DB3 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccessIcon.png; path = Pod/Assets/NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		22794ED334C5C6348E01BDE3980337D0 /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
+		251018F42F4A68D244D20AE6BF162D33 /* libTSMessages.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTSMessages.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AF0E62DFA0FEA53919A06D9B436F286 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = TSMessagesDefaultDesign.json; path = Pod/Assets/TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		2C2AFADC10F6BDA88452CA9AD39C8663 /* TSMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSMessageView.h; path = Pod/Classes/TSMessageView.h; sourceTree = "<group>"; };
+		2EAF97B23FD5E1F0608BF956A521F64A /* TSMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSMessageView.m; path = Pod/Classes/TSMessageView.m; sourceTree = "<group>"; };
+		2F75AB6F0CFD9846BCD6DB21EA864992 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		30D9EF271DD620D8E80542AC783CF6D6 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundMessage.png; path = Pod/Assets/NotificationBackgroundMessage.png; sourceTree = "<group>"; };
+		31239443EB0CCAC22DE6E2F52B994990 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationButtonBackground@2x.png"; path = "Pod/Assets/NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		31E8E00D978D87BC0A4C3D63D0ED0936 /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarning.png; path = Pod/Assets/NotificationBackgroundWarning.png; sourceTree = "<group>"; };
+		33627A8D379962C6B680EEEB526B3340 /* Pods-REST-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-REST-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3A858324C7CABDC881A4ADF4EDAFDB3D /* TSMessages.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TSMessages.xcconfig; sourceTree = "<group>"; };
+		402CDBA7C7E5D78E43F9C9F5BC44D035 /* Pods-REST-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-REST-acknowledgements.plist"; sourceTree = "<group>"; };
+		4CFE2D983905683BF7B124A75A704A1E /* TSMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSMessage.h; path = Pod/Classes/TSMessage.h; sourceTree = "<group>"; };
+		627E0380FA0CBD96F09439C1B66BDAFD /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundErrorIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		6BC6A7838D65536A4CFCD2C1EFD89626 /* LBBlurredImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LBBlurredImage-dummy.m"; sourceTree = "<group>"; };
+		70424D61528CD0189C11F0EBEB9F8FBD /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccess.png; path = Pod/Assets/NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
+		7805EA474F645A1D0E9012B5580E1D86 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundError.png; path = Pod/Assets/NotificationBackgroundError.png; sourceTree = "<group>"; };
+		7C7912426A65297B5BF18813E86BA2FF /* TSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSBlurView.h; path = Pod/Classes/TSBlurView.h; sourceTree = "<group>"; };
+		7DB7FB42DF91C12B1731BFD1ED2419EB /* Pods-REST-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-REST-dummy.m"; sourceTree = "<group>"; };
+		818F753F2950CE5A55C3AF64AAE426C5 /* TSMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSMessage.m; path = Pod/Classes/TSMessage.m; sourceTree = "<group>"; };
+		84FD504ECF337D7329FCE854F80F21CF /* Pods-REST-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-REST-resources.sh"; sourceTree = "<group>"; };
+		85EB4D314AD1AC01A9C897BA2FB28D93 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccess@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		8B440F024C2D461380A2EA67237E3141 /* libPods-REST.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-REST.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C38FF660CC5E9E240C6EE6FA03196A1 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E8028B9D7CAAD74FB37A67078CEC5CB /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+LBBlurredImage.m"; path = "LBBlurredImage/UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9A2740DC883680EFD3323412C7C2A481 /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarning@2x.png"; path = "Pod/Assets/NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		9A7C0874772F497A3A6FADB180D81345 /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundMessage@2x.png"; path = "Pod/Assets/NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
+		A7E04D80A78F4F6834BF31B517D8E12B /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccessIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		B27639C2D056DF693D504221FB0807BA /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "LBBlurredImage/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		BC1316B56CDF36226D524463D712552A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		C0074572713A719CA1E4A07B5F77616B /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
+		C3004CE06C15B9B00EFBEAB05419000F /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationButtonBackground.png; path = Pod/Assets/NotificationButtonBackground.png; sourceTree = "<group>"; };
+		C3C66CC3889DB51384ED77820EA9C11D /* Pods-REST.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-REST.debug.xcconfig"; sourceTree = "<group>"; };
+		C49B39306DE47B0206B6232451C0A066 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarningIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
+		C73EFEAD972EB4637F106B24D3E77DF4 /* LBBlurredImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LBBlurredImage-prefix.pch"; sourceTree = "<group>"; };
+		CAA8ABBAF6FA596E52C4868211D211F8 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundError@2x.png"; path = "Pod/Assets/NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
+		CB453DD118F9B07D13CD6847EE7D388D /* Pods-REST-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-REST-frameworks.sh"; sourceTree = "<group>"; };
+		CFAB144A01BE7AAACA72D4EBBFFE8AAD /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundErrorIcon.png; path = Pod/Assets/NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		D345234272376D19FC1BADFC245D43B8 /* TSMessages-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TSMessages-dummy.m"; sourceTree = "<group>"; };
+		D8BD724888C7286F5812C96DC4ADE4FC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		DA40D03688B00D22CED670E9E7477D1C /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarningIcon.png; path = Pod/Assets/NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		DF57A1F367023B010C4CB3CBB86A8F52 /* TSMessages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-prefix.pch"; sourceTree = "<group>"; };
+		E0F484E58A63E904F7CCFEA422E2EEDC /* libLBBlurredImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLBBlurredImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8348898FC845530982CAC24A76F8435 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+LBBlurredImage.h"; path = "LBBlurredImage/UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		F23FC559A9B0C6A8B6BEA81CE48AC6A8 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
+		FA84D3F06A7BBF09022AEC483778E246 /* LBBlurredImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LBBlurredImage.xcconfig; sourceTree = "<group>"; };
+		FB26B79A6A13C140508E7628D2114593 /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CA9E4B06AF82B7C67DC302218579D08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F27D5C9FA93870917B0779A9D11557A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A9570E0BC01D878B9D6D834176F4076 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7163F3AAF6DAF5797736AA30745F0AF /* Accelerate.framework in Frameworks */,
+				AEDAFE224913A654083E3FDC16E298F4 /* CoreGraphics.framework in Frameworks */,
+				CA63C07652DF51065C9ADBFD0D1B0150 /* Foundation.framework in Frameworks */,
+				CF74DEF83AF61AD74A1EBF728948C6DD /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C49BE1560FA8CB539A0F7CB3282BD65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F85F550CAC3A6BF67DC12EDB35CAD8F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D29288E97A2E73952E186427057A397 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C589C26237CBBD2F1AFFAD5275EFDDD3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7412EFBBE1AF58E47EAFD975C79191FF /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15EA929012724872CCD1F3C8B9AB1321 /* LBBlurredImage */ = {
+			isa = PBXGroup;
+			children = (
+				B27639C2D056DF693D504221FB0807BA /* UIImage+ImageEffects.h */,
+				0D898948B574991CCEAA4A0A40E049C5 /* UIImage+ImageEffects.m */,
+				E8348898FC845530982CAC24A76F8435 /* UIImageView+LBBlurredImage.h */,
+				8E8028B9D7CAAD74FB37A67078CEC5CB /* UIImageView+LBBlurredImage.m */,
+				AAE9BCC718C3D63248B65AF255417588 /* Support Files */,
+			);
+			path = LBBlurredImage;
+			sourceTree = "<group>";
+		};
+		1E03733367FC1CF517471CC3FF818D86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A54997F3823A03767AD2807462A8B56 /* HexColors */,
+				15EA929012724872CCD1F3C8B9AB1321 /* LBBlurredImage */,
+				E98578D29AFE9BC1936811876543F31E /* TSMessages */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		67EA2EC488D71133EC8FA91915C6EC1E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A858324C7CABDC881A4ADF4EDAFDB3D /* TSMessages.xcconfig */,
+				D345234272376D19FC1BADFC245D43B8 /* TSMessages-dummy.m */,
+				DF57A1F367023B010C4CB3CBB86A8F52 /* TSMessages-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TSMessages";
+			sourceTree = "<group>";
+		};
+		6A54997F3823A03767AD2807462A8B56 /* HexColors */ = {
+			isa = PBXGroup;
+			children = (
+				FB26B79A6A13C140508E7628D2114593 /* HexColor.h */,
+				1E3FE79EE069EE39ECC2B04088AFB3BA /* HexColor.m */,
+				D61E854D2D79D99E378BDAF414B63E04 /* Support Files */,
+			);
+			path = HexColors;
+			sourceTree = "<group>";
+		};
+		6B17687E5FA3E4FAA29BFD9B71E2CA6A /* Pods-REST */ = {
+			isa = PBXGroup;
+			children = (
+				33627A8D379962C6B680EEEB526B3340 /* Pods-REST-acknowledgements.markdown */,
+				402CDBA7C7E5D78E43F9C9F5BC44D035 /* Pods-REST-acknowledgements.plist */,
+				7DB7FB42DF91C12B1731BFD1ED2419EB /* Pods-REST-dummy.m */,
+				CB453DD118F9B07D13CD6847EE7D388D /* Pods-REST-frameworks.sh */,
+				84FD504ECF337D7329FCE854F80F21CF /* Pods-REST-resources.sh */,
+				C3C66CC3889DB51384ED77820EA9C11D /* Pods-REST.debug.xcconfig */,
+				1749DE2AC24C77B605F8E11F18433AE1 /* Pods-REST.release.xcconfig */,
+			);
+			name = "Pods-REST";
+			path = "Target Support Files/Pods-REST";
+			sourceTree = "<group>";
+		};
+		7412EFBBE1AF58E47EAFD975C79191FF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2F75AB6F0CFD9846BCD6DB21EA864992 /* Accelerate.framework */,
+				D8BD724888C7286F5812C96DC4ADE4FC /* CoreGraphics.framework */,
+				BC1316B56CDF36226D524463D712552A /* Foundation.framework */,
+				05E9DE23470276E5BD7696D06881E026 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */,
+				1E03733367FC1CF517471CC3FF818D86 /* Pods */,
+				CB105CE3863A622A1CB9FD856AD1D2C5 /* Products */,
+				EBFAA7627BEFD02AF1C280C070156650 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		AAE9BCC718C3D63248B65AF255417588 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA84D3F06A7BBF09022AEC483778E246 /* LBBlurredImage.xcconfig */,
+				6BC6A7838D65536A4CFCD2C1EFD89626 /* LBBlurredImage-dummy.m */,
+				C73EFEAD972EB4637F106B24D3E77DF4 /* LBBlurredImage-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/LBBlurredImage";
+			sourceTree = "<group>";
+		};
+		CB105CE3863A622A1CB9FD856AD1D2C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C38FF660CC5E9E240C6EE6FA03196A1 /* libHexColors.a */,
+				E0F484E58A63E904F7CCFEA422E2EEDC /* libLBBlurredImage.a */,
+				8B440F024C2D461380A2EA67237E3141 /* libPods-REST.a */,
+				251018F42F4A68D244D20AE6BF162D33 /* libTSMessages.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D61E854D2D79D99E378BDAF414B63E04 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F23FC559A9B0C6A8B6BEA81CE48AC6A8 /* HexColors.xcconfig */,
+				C0074572713A719CA1E4A07B5F77616B /* HexColors-dummy.m */,
+				22794ED334C5C6348E01BDE3980337D0 /* HexColors-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HexColors";
+			sourceTree = "<group>";
+		};
+		DD05A6FFD2497737028D4EAD766266E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7805EA474F645A1D0E9012B5580E1D86 /* NotificationBackgroundError.png */,
+				CAA8ABBAF6FA596E52C4868211D211F8 /* NotificationBackgroundError@2x.png */,
+				CFAB144A01BE7AAACA72D4EBBFFE8AAD /* NotificationBackgroundErrorIcon.png */,
+				627E0380FA0CBD96F09439C1B66BDAFD /* NotificationBackgroundErrorIcon@2x.png */,
+				30D9EF271DD620D8E80542AC783CF6D6 /* NotificationBackgroundMessage.png */,
+				9A7C0874772F497A3A6FADB180D81345 /* NotificationBackgroundMessage@2x.png */,
+				70424D61528CD0189C11F0EBEB9F8FBD /* NotificationBackgroundSuccess.png */,
+				85EB4D314AD1AC01A9C897BA2FB28D93 /* NotificationBackgroundSuccess@2x.png */,
+				225EE690A66B98EA1FA5E32247788DB3 /* NotificationBackgroundSuccessIcon.png */,
+				A7E04D80A78F4F6834BF31B517D8E12B /* NotificationBackgroundSuccessIcon@2x.png */,
+				31E8E00D978D87BC0A4C3D63D0ED0936 /* NotificationBackgroundWarning.png */,
+				9A2740DC883680EFD3323412C7C2A481 /* NotificationBackgroundWarning@2x.png */,
+				DA40D03688B00D22CED670E9E7477D1C /* NotificationBackgroundWarningIcon.png */,
+				C49B39306DE47B0206B6232451C0A066 /* NotificationBackgroundWarningIcon@2x.png */,
+				C3004CE06C15B9B00EFBEAB05419000F /* NotificationButtonBackground.png */,
+				31239443EB0CCAC22DE6E2F52B994990 /* NotificationButtonBackground@2x.png */,
+				2AF0E62DFA0FEA53919A06D9B436F286 /* TSMessagesDefaultDesign.json */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E98578D29AFE9BC1936811876543F31E /* TSMessages */ = {
+			isa = PBXGroup;
+			children = (
+				7C7912426A65297B5BF18813E86BA2FF /* TSBlurView.h */,
+				07EB88D0C49CF4A7340DE12385AA51DF /* TSBlurView.m */,
+				4CFE2D983905683BF7B124A75A704A1E /* TSMessage.h */,
+				818F753F2950CE5A55C3AF64AAE426C5 /* TSMessage.m */,
+				2C2AFADC10F6BDA88452CA9AD39C8663 /* TSMessageView.h */,
+				2EAF97B23FD5E1F0608BF956A521F64A /* TSMessageView.m */,
+				DD05A6FFD2497737028D4EAD766266E2 /* Resources */,
+				67EA2EC488D71133EC8FA91915C6EC1E /* Support Files */,
+			);
+			path = TSMessages;
+			sourceTree = "<group>";
+		};
+		EBFAA7627BEFD02AF1C280C070156650 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6B17687E5FA3E4FAA29BFD9B71E2CA6A /* Pods-REST */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2ACF605030BE1FF27F1D45C961C61E2F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C1558C1B536F4165DD39E18445CD809 /* UIImage+ImageEffects.h in Headers */,
+				0E5571ED7BD9BC0178B4BE124DA5B2CD /* UIImageView+LBBlurredImage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED248C8B9520869CB488C3FBF23324F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2930C8E441D790975DA99ADE5DCBD4B /* TSBlurView.h in Headers */,
+				5DAE44733694A86D378C4AB9D03EF360 /* TSMessage.h in Headers */,
+				FF359E4C20F2E270021628591F32F142 /* TSMessageView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F76C84D031AB738E21FC91B86C76B41A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DAE4CFA529CF3FF5D27773E81A54981 /* HexColor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		09F9A315E2E4B3FB42F34CF43B5D6CFC /* Pods-REST */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23CC08912F20DC8537685780ECB980DD /* Build configuration list for PBXNativeTarget "Pods-REST" */;
+			buildPhases = (
+				448BF5172D12645D77A324AAE3421287 /* Sources */,
+				4C49BE1560FA8CB539A0F7CB3282BD65 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4372CADAE5FE2CB4C703E457C5498A21 /* PBXTargetDependency */,
+				1ABC9119FB8A1A036D6FEF45B3CB44E3 /* PBXTargetDependency */,
+				CC75F549A09C4731FC6857AC55F785AC /* PBXTargetDependency */,
+			);
+			name = "Pods-REST";
+			productName = "Pods-REST";
+			productReference = 8B440F024C2D461380A2EA67237E3141 /* libPods-REST.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4B137CE00C5AA2C69DDCFA81AF810C16 /* TSMessages */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF795CA6BE1CB76B1BFB76DF6B8291D8 /* Build configuration list for PBXNativeTarget "TSMessages" */;
+			buildPhases = (
+				0051A9C3C42E253DD1B8AB41DF706BB0 /* Sources */,
+				8D29288E97A2E73952E186427057A397 /* Frameworks */,
+				EED248C8B9520869CB488C3FBF23324F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B8AC6BE7A7641A3A801560AB2862FB9F /* PBXTargetDependency */,
+			);
+			name = TSMessages;
+			productName = TSMessages;
+			productReference = 251018F42F4A68D244D20AE6BF162D33 /* libTSMessages.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		785E456A4B5EC8A508CE868E04789C03 /* LBBlurredImage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 736A2D2A52254E862EBC7B9E910C8F94 /* Build configuration list for PBXNativeTarget "LBBlurredImage" */;
+			buildPhases = (
+				555882D2214262A0107830B8961C8DB8 /* Sources */,
+				2A9570E0BC01D878B9D6D834176F4076 /* Frameworks */,
+				2ACF605030BE1FF27F1D45C961C61E2F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LBBlurredImage;
+			productName = LBBlurredImage;
+			productReference = E0F484E58A63E904F7CCFEA422E2EEDC /* libLBBlurredImage.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E9EF397B95762DDB254C71DDCB4B1381 /* HexColors */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACABDDD53049FF494333AA35F2BA7BF8 /* Build configuration list for PBXNativeTarget "HexColors" */;
+			buildPhases = (
+				FE7B08D6B2E1B8009D5AD5096723B2DF /* Sources */,
+				1CA9E4B06AF82B7C67DC302218579D08 /* Frameworks */,
+				F76C84D031AB738E21FC91B86C76B41A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HexColors;
+			productName = HexColors;
+			productReference = 8C38FF660CC5E9E240C6EE6FA03196A1 /* libHexColors.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CB105CE3863A622A1CB9FD856AD1D2C5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E9EF397B95762DDB254C71DDCB4B1381 /* HexColors */,
+				785E456A4B5EC8A508CE868E04789C03 /* LBBlurredImage */,
+				09F9A315E2E4B3FB42F34CF43B5D6CFC /* Pods-REST */,
+				4B137CE00C5AA2C69DDCFA81AF810C16 /* TSMessages */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0051A9C3C42E253DD1B8AB41DF706BB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23F2986B78BBEE90E27DB3BF09FD5294 /* TSBlurView.m in Sources */,
+				3B8F7D0206F2F9225135AF7F3763B140 /* TSMessage.m in Sources */,
+				744D713C25916D3E27A80B6907757BC7 /* TSMessages-dummy.m in Sources */,
+				A387346229A52B5006794D577C3FE487 /* TSMessageView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		448BF5172D12645D77A324AAE3421287 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AEC55AC1EBCA485AC989C23CC56C3 /* Pods-REST-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		555882D2214262A0107830B8961C8DB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8994E7853C0A72024779EE2DF8958F33 /* LBBlurredImage-dummy.m in Sources */,
+				924F9BF3AB03D2340E03869EF2076439 /* UIImage+ImageEffects.m in Sources */,
+				91975E1B778DF34852BFE3D6510F5F2E /* UIImageView+LBBlurredImage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE7B08D6B2E1B8009D5AD5096723B2DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				615D57F2D5026472A990CBDA9BF1AB72 /* HexColor.m in Sources */,
+				B156B6156AD56216B48A15118520BC24 /* HexColors-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1ABC9119FB8A1A036D6FEF45B3CB44E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LBBlurredImage;
+			target = 785E456A4B5EC8A508CE868E04789C03 /* LBBlurredImage */;
+			targetProxy = 5DE70A4614764335998BA620E1463852 /* PBXContainerItemProxy */;
+		};
+		4372CADAE5FE2CB4C703E457C5498A21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HexColors;
+			target = E9EF397B95762DDB254C71DDCB4B1381 /* HexColors */;
+			targetProxy = 6464854D341119061BB5C6C8E311724C /* PBXContainerItemProxy */;
+		};
+		B8AC6BE7A7641A3A801560AB2862FB9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HexColors;
+			target = E9EF397B95762DDB254C71DDCB4B1381 /* HexColors */;
+			targetProxy = 91FDD85169BB1A7239A85F4F5B5AE709 /* PBXContainerItemProxy */;
+		};
+		CC75F549A09C4731FC6857AC55F785AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TSMessages;
+			target = 4B137CE00C5AA2C69DDCFA81AF810C16 /* TSMessages */;
+			targetProxy = 9BACFE1CEE4CC0C135CDE98E4C431B12 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0ADEF557E3D734DA380495E0A0653164 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F23FC559A9B0C6A8B6BEA81CE48AC6A8 /* HexColors.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		42287DDF97330524BA3EF220F0276DA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4CBAC34E6E47EB70A7B35F056D25E134 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A858324C7CABDC881A4ADF4EDAFDB3D /* TSMessages.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TSMessages/TSMessages-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4EB742EC5042E79485DE0F94B4FE759F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1749DE2AC24C77B605F8E11F18433AE1 /* Pods-REST.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		559ABDFE5DDB57D17121BBE2465A5655 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3C66CC3889DB51384ED77820EA9C11D /* Pods-REST.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		873B34958093AC6ABA84858F4F5918F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA84D3F06A7BBF09022AEC483778E246 /* LBBlurredImage.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/LBBlurredImage/LBBlurredImage-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		895B316F85CB018039F1C65D08FC70B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A858324C7CABDC881A4ADF4EDAFDB3D /* TSMessages.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TSMessages/TSMessages-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8DEBED39C95E7F37BE728D2F78C6614F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA84D3F06A7BBF09022AEC483778E246 /* LBBlurredImage.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/LBBlurredImage/LBBlurredImage-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AE9439C22469D35336242DD983DB5C5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		F2C6AA473434829B4DCE7AE2201C9029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F23FC559A9B0C6A8B6BEA81CE48AC6A8 /* HexColors.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23CC08912F20DC8537685780ECB980DD /* Build configuration list for PBXNativeTarget "Pods-REST" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				559ABDFE5DDB57D17121BBE2465A5655 /* Debug */,
+				4EB742EC5042E79485DE0F94B4FE759F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE9439C22469D35336242DD983DB5C5F /* Debug */,
+				42287DDF97330524BA3EF220F0276DA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		736A2D2A52254E862EBC7B9E910C8F94 /* Build configuration list for PBXNativeTarget "LBBlurredImage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DEBED39C95E7F37BE728D2F78C6614F /* Debug */,
+				873B34958093AC6ABA84858F4F5918F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACABDDD53049FF494333AA35F2BA7BF8 /* Build configuration list for PBXNativeTarget "HexColors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2C6AA473434829B4DCE7AE2201C9029 /* Debug */,
+				0ADEF557E3D734DA380495E0A0653164 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF795CA6BE1CB76B1BFB76DF6B8291D8 /* Build configuration list for PBXNativeTarget "TSMessages" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CBAC34E6E47EB70A7B35F056D25E134 /* Debug */,
+				895B316F85CB018039F1C65D08FC70B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
